@@ -1,6 +1,9 @@
 package com.hdxy.mapper;
 
+import java.util.List;
+
 import com.hdxy.pojo.User;
+import com.hdxy.pojo.UserMessage;
 
 public interface UserMapper {
 	User getUserByUserName(String userName);
@@ -16,4 +19,6 @@ public interface UserMapper {
 	User getUserByUserId(int userId);
 	
 	int deleteUserByUserId(int userId);
+	
+	List<UserMessage> getUsers();
 }

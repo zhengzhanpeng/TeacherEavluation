@@ -57,6 +57,9 @@
 				<value>admin/delete_college</value>
 				<value>admin/get_colleges_and_state</value>
 				<value>admin/college_message</value>
+				<value>admin/user_message</value>
+				<value>admin/get_users</value>
+				<value>admin/delete_user</value>
 			</list>
 		</property>
 	</bean>
