@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="  
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd  
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<context:annotation-config />
+	<!-- <context:component-scan base-package="com.hdxy.test" /> -->
+	
+	<bean id="dataSource"  
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
+        <property name="url" value="jdbc:mysql://localhost:3306/teacher_evaluation?characterEncoding=utf8" />  
+        <property name="username" value="root" />  
+        <property name="password" value="root" />  
+    </bean> 
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- dataSource属性指定要用到的连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- configLocation属性指定mybatis的核心配置文件 -->
+		<property name="configLocation" value="/WEB-INF/classes/config/mybatis-config.xml" />
+		<!-- <property name="configLocation" value="config/mybatis-config.xml" /> -->
+	</bean>
+	 
+	<!-- 该 BeanPostProcessor 将自动对标注 @Autowired 的 Bean 进行注入 -->     
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.hdxy.mapper" />
+	</bean>
+	<!-- 用于检测用户和管理员的登录状态，以下url是需要检测的 -->
+	<bean id="checkUrls" class="com.hdxy.pojo.CheckUrls">
+		<property name="userUrls">
+			<list>
+				<value>user/semester1</value>
+				<value>user/semester2</value>
+				<value>user/add_semester1</value>
+				<value>user/add_semester2</value>
+				<value>user/delete_semester1</value>
+				<value>user/delete_semester2</value>
+				<value>user/submit_semester1</value>
+				<value>user/submit_emester2</value>
+				<value>user/set_password</value>
+				<value>user/index</value>
+				<value>user/get_semester1s</value>
+				<value>user/get_semester2s</value>
+			</list>
+		</property>
+		<property name="adminUrls">
+			<list>
+				<value>admin/set_password</value>
+				<value>admin/save_college</value>
+				<value>admin/delete_college</value>
+				<value>admin/get_colleges_and_state</value>
+				<value>admin/college_message</value>
+			</list>
+		</property>
+	</bean>
+</beans> 

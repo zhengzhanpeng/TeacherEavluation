@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdxy.mapper.EndScoreMapper" >
+	<resultMap type="EndScore" id="endScoreList"></resultMap>
+	<select id="getEndScores" parameterType="Integer" resultMap="endScoreList">
+		SELECT name, position, m1, m2, all FROM end_score 
+		WHERE collegeId = #{collegeId} AND year = (SELECT value FROM some_message WHERE name = 'year');
+	</select>
+</mapper>

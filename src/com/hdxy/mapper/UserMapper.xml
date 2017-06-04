@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdxy.mapper.UserMapper" >
+	<select id="getUserByUserName" parameterType="String" resultType="User">
+		select id, password, random, collegeId from user where userName = #{userName};
+	</select>
+	<select id="checkUserName" parameterType="String" resultType="Integer">
+		select id from user where userName = #{userName};
+	</select>
+	<insert id="addUser" parameterType="User">
+		insert into user values(null, #{userName}, #{password}, #{random}, #{collegeId});
+	</insert>
+	<select id="getCollegeIdByUserId" parameterType="Integer" resultType="Integer">
+		SELECT collegeId FROM user WHERE id = #{id};
+	</select>
+	<select id="getUserByUserId" parameterType="Integer" resultType="User">
+		SELECT password, random FROM user WHERE id = #{id};
+	</select>
+	<delete id="deleteUserByUserId" parameterType="Integer">
+		DELETE FROM user WHERE id = #{id};
+	</delete>
+</mapper>

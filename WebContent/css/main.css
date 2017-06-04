@@ -1,0 +1,19 @@
+.admin-main{
+	margin: 15px;
+}
+.admin-main .layui-field-title .layui-field-box{
+	padding: 10px 30px;
+}
+.admin-main .layui-field-title .layui-field-box p{
+	padding: 5px 0;
+}
+.layui-icon {
+	font-size: 25px;
+}
+p {
+	text-indent: 2em;
+}
+.layui-elem-quote h2{
+	margin-top:0  !important;
+	margin-bottom:0 !important;
+}

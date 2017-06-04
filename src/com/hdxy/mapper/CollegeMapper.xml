@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdxy.mapper.CollegeMapper" >
+	<resultMap type="College" id="collegeList"></resultMap>
+	<select id="getColleges" resultMap="collegeList">
+		SELECT collegeName, id, phone FROM college;
+	</select>
+	<insert id="addCollege" parameterType="College">
+		INSERT INTO college VALUES(null, #{collegeName}, #{phone});	
+	</insert>
+	<delete id="deleteCollege" parameterType="Integer">
+		DELETE FROM college WHERE id = #{id};
+	</delete>
+	<update id="updateCollege" parameterType="College">
+		UPDATE college SET collegeName = #{collegeName}, phone = #{phone} WHERE collegeId = #{collegeId};
+	</update>
+	<select id="getCollegesAndState" resultMap="collegeList">
+		SELECT id, collegeName, phone, state FROM college;
+	</select>
+	<select id="getState" parameterType="Integer" resultType="Integer">
+		SELECT state FROM college WHERE 
+		id = #{collegeId};
+	</select>
+	<update id="setState" parameterType="Integer">
+		UPDATE college SET state = #{state} WHERE id = #{collegeId};
+	</update>
+</mapper>

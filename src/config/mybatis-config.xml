@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+			<typeAlias alias="User" type="com.hdxy.pojo.User" />
+			<typeAlias alias="College" type="com.hdxy.pojo.College" />
+			<typeAlias alias="DataShow" type="com.hdxy.pojo.DataShow" />
+			<typeAlias alias="EndScore" type="com.hdxy.pojo.EndScore" />
+			<typeAlias alias="Semester1" type="com.hdxy.pojo.Semester1" />
+			<typeAlias alias="Semester2" type="com.hdxy.pojo.Semester2" />
+			<typeAlias alias="TeacherData" type="com.hdxy.pojo.TeacherData"/>
+			<typeAlias alias="Admin" type="com.hdxy.pojo.Admin"/>
+	</typeAliases>
+</configuration>
