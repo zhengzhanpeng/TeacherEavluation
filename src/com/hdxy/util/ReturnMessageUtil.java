@@ -2,7 +2,7 @@ package com.hdxy.util;
 
 public class ReturnMessageUtil {
 	public final static String TRUE = "1";
-	public final static String SYSTEM_BUSY = "系统繁忙，请刷新页面稍后再试";
+	public final static String SYSTEM_BUSY = "目前系统繁忙，请刷新页面稍后再试";
 	public final static String PASSWORD_DIFFERENT = "您两次输入的两次新密码不一致，请重新输入";
 	public final static String PASSOWRD_WRONG = "对不起，您输入的密码不正确";
 	public final static String COLLEGE_NAME_IS_NULL = "学院名称不能为空";
@@ -12,4 +12,5 @@ public class ReturnMessageUtil {
 	public final static String PASSWORD_IS_NULL = "密码不能为空";
 	public final static String USER_NOT_EXIST = "用户不存在";
 	public final static String USER_NAME_OR_PASSWORD_WRONG = "用户名或密码错误";
+	public final static String COLLEGE_NAME_NOT_EXIST = "学院名称不存在，请刷新后重试";
 }

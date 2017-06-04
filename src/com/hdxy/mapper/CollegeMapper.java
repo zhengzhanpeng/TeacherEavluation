@@ -53,4 +53,11 @@ public interface CollegeMapper {
 	 * @return 返回修改的数目
 	 */
 	Integer setState(int collegeId);
+	
+	/**
+	 * 通过collegeName获取CollegeId
+	 * @param collegeName
+	 * @return
+	 */
+	Integer getCollegeIdByCollegeName(String collegeName);
 }

@@ -25,4 +25,7 @@
 	<update id="setState" parameterType="Integer">
 		UPDATE college SET state = #{state} WHERE id = #{collegeId};
 	</update>
+	<select id="getCollegeIdByCollegeName" parameterType="String" resultType="Integer">
+		SELECT id FROM college WHERE collegeName = #{collegeName};
+	</select>
 </mapper>

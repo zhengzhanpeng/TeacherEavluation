@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hdxy.mapper.CollegeMapper;
 import com.hdxy.mapper.UserMapper;
+import com.hdxy.pojo.User;
 import com.hdxy.pojo.UserMessage;
+import com.hdxy.util.EncryptionUtil;
 import com.hdxy.util.MainUtil;
 import com.hdxy.util.ReturnMessageUtil;
 
@@ -20,6 +23,9 @@ public class UserController {
 
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private CollegeMapper collegeMapper;
 	
 	/**
 	 * 返回用户信息页面
@@ -42,9 +48,42 @@ public class UserController {
 		return str;
 	}
 	
+	/**
+	 * 通过用户Id删除指定用户
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping(value = "/delete_user", method = RequestMethod.POST)
 	public String deleteUser(@RequestParam int userId) {
 		int result = userMapper.deleteUserByUserId(userId);
+		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
+		return ReturnMessageUtil.TRUE;
+	}
+	
+	/**
+	 * 添加用户，根据学院名称获取学院Id
+	 * @param userName
+	 * @param password
+	 * @param collegeName
+	 * @return
+	 */
+	@RequestMapping(value = "/add_user", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String addUser(@RequestParam String userName, @RequestParam String password
+			, @RequestParam String collegeName) {
+		if(userName == "" || password == "" || collegeName == "") {
+			return ReturnMessageUtil.MESSAGE_IS_NULL;
+		}
+		Integer collegeId = collegeMapper.getCollegeIdByCollegeName(collegeName);
+		if(collegeId == null) return ReturnMessageUtil.COLLEGE_NAME_NOT_EXIST;
+		User user = new User();
+		user.setCollegeId(collegeId);
+		user.setUserName(userName);
+		String random = EncryptionUtil.getRandom();
+		user.setRandom(random);
+		password = EncryptionUtil.getPassword(password, random, "MD5");
+		user.setPassword(password);
+		int result = userMapper.addUser(user);
 		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;
 	}
