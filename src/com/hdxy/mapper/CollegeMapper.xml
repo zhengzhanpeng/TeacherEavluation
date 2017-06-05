@@ -22,10 +22,13 @@
 		SELECT state FROM college WHERE 
 		id = #{collegeId};
 	</select>
-	<update id="setState" parameterType="Integer">
-		UPDATE college SET state = #{state} WHERE id = #{collegeId};
+	<update id="setState">
+		UPDATE college SET state = #{state, jdbcType=INTEGER} WHERE id = #{collegeId, jdbcType=INTEGER};
 	</update>
 	<select id="getCollegeIdByCollegeName" parameterType="String" resultType="Integer">
 		SELECT id FROM college WHERE collegeName = #{collegeName};
 	</select>
+	<update id="openAllCollegeState">
+		UPDATE college SET state = 1;
+	</update>
 </mapper>
