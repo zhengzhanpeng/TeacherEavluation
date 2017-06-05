@@ -2,6 +2,8 @@ package com.hdxy.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hdxy.pojo.College;
 
 public interface CollegeMapper {
@@ -48,11 +50,11 @@ public interface CollegeMapper {
 	Integer getState(int collegeId);
 	
 	/**
-	 * 通过学院ID、相应学期、相应学年修改对应的状态
-	 * @param collegeState
+	 * 通过学院ID修改对应的状态
+	 * @param 
 	 * @return 返回修改的数目
 	 */
-	Integer setState(int collegeId);
+	Integer setState(@Param("collegeId") int collegeId, @Param("state") int state);
 	
 	/**
 	 * 通过collegeName获取CollegeId
@@ -60,4 +62,10 @@ public interface CollegeMapper {
 	 * @return
 	 */
 	Integer getCollegeIdByCollegeName(String collegeName);
+	
+	/**
+	 * 打开所有的学院录入开关
+	 * @return
+	 */
+	int openAllCollegeState();
 }

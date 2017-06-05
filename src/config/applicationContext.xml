@@ -60,6 +60,8 @@
 				<value>admin/user_message</value>
 				<value>admin/get_users</value>
 				<value>admin/delete_user</value>
+				<value>admin/open_all_college_state</value>
+				<value>admin/open_college_state</value>
 			</list>
 		</property>
 	</bean>

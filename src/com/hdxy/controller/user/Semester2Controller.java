@@ -118,14 +118,7 @@ public class Semester2Controller {
 	@RequestMapping(value = "/submit_semester2", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String submitSemester2(@ModelAttribute("collegeId") int collegeId) {
-		String str = someMessageMapper.getValueByName("year");
-		int year = Integer.parseInt(str);
-		CollegeState collegeState = new CollegeState();
-		collegeState.setCollegeId(collegeId);
-		collegeState.setSemester(2);
-		collegeState.setState(2);
-		collegeState.setYear(year);
-		int value = collegeMapper.setState(collegeId);
+		int value = collegeMapper.setState(collegeId, 2);
 		if(value == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;
 	}
