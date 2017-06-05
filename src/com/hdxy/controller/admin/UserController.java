@@ -87,4 +87,29 @@ public class UserController {
 		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;
 	}
+	
+	/**
+	 * 通过用户Id修改指定用户密码
+	 * @param userId
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping(value = "/set_user_password", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String setUserPassword(@RequestParam int userId, @RequestParam String password) {
+		User user = userMapper.getUserByUserId(userId);
+		password = EncryptionUtil.getPassword(password, user.getPassword(), "MD5");
+		int result = userMapper.setUserPassword(userId, password);
+		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
+		return ReturnMessageUtil.TRUE;
+	}
 }
+
+
+
+
+
+
+
+
+

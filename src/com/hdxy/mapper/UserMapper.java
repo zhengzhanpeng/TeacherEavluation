@@ -2,6 +2,8 @@ package com.hdxy.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hdxy.pojo.User;
 import com.hdxy.pojo.UserMessage;
 
@@ -20,5 +22,11 @@ public interface UserMapper {
 	
 	int deleteUserByUserId(int userId);
 	
+	/**
+	 * 获取用户的所有信息
+	 * @return
+	 */
 	List<UserMessage> getUsers();
+	
+	int setUserPassword(@Param("userId") int userId, @Param("password") String password);
 }

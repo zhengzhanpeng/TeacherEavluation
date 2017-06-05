@@ -60,6 +60,7 @@
 				<value>admin/user_message</value>
 				<value>admin/get_users</value>
 				<value>admin/delete_user</value>
+				<value>admin/set_user_password</value>
 			</list>
 		</property>
 	</bean>

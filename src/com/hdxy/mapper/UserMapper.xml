@@ -22,7 +22,10 @@
 		DELETE FROM user WHERE id = #{id};
 	</delete>
 	<select id="getUsers" resultMap="userList">
-		select u.id, u.userName, c.collegeName, c.phone FROM user AS u INNER JOIN college AS c ON 
+		SELECT u.id, u.userName, c.collegeName, c.phone FROM user AS u INNER JOIN college AS c ON 
 		u.collegeId = c.id; 
 	</select>
+	<update id="setUserPassword">
+		UPDATE user SET password = #{passowrd, jdbcType=VARCHAR} WHERE id = #{userId, jdbcType=INTEGER};
+	</update>
 </mapper>
