@@ -63,6 +63,7 @@
 				<value>admin/set_user_password</value>
 				<value>admin/open_all_college_state</value>
 				<value>admin/open_college_state</value>
+				<value>admin/set_semester</value>
 			</list>
 		</property>
 	</bean>

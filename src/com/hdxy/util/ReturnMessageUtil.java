@@ -13,4 +13,6 @@ public class ReturnMessageUtil {
 	public final static String USER_NOT_EXIST = "用户不存在";
 	public final static String USER_NAME_OR_PASSWORD_WRONG = "用户名或密码错误";
 	public final static String COLLEGE_NAME_NOT_EXIST = "学院名称不存在，请刷新后重试";
+	public final static String MESSAGE_NOT_NUMBER = "您输入的信息不是数字，请重新输入";
+	public final static String SEMESTER_WRONG = "学期只分为1、2两种可能";
 }
