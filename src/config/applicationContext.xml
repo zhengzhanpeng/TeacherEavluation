@@ -64,6 +64,8 @@
 				<value>admin/open_all_college_state</value>
 				<value>admin/open_college_state</value>
 				<value>admin/set_semester</value>
+				<value>admin/score_input</value>
+				<value>admin/get_colleges</value>
 			</list>
 		</property>
 	</bean>

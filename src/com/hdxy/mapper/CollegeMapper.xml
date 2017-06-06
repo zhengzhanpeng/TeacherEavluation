@@ -7,7 +7,7 @@
 		SELECT collegeName, id, phone FROM college;
 	</select>
 	<insert id="addCollege" parameterType="College">
-		INSERT INTO college VALUES(null, #{collegeName}, #{phone});	
+		INSERT INTO college VALUES(null, #{collegeName}, #{phone}, #{state});	
 	</insert>
 	<delete id="deleteCollege" parameterType="Integer">
 		DELETE FROM college WHERE id = #{id};

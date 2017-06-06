@@ -31,7 +31,8 @@ public class CollegeController {
 	}
 	
 	/**
-	 * 添加一个学院至数据库
+	 * 添加一个学院至数据库,如果学院信息已存在，则更新学院名称和电话
+	 * 若不存在则添加一个新的学院，初始学院状态为-1；
 	 * @param collegeName
 	 * @param phone
 	 * @return
@@ -46,6 +47,7 @@ public class CollegeController {
 		college.setCollegeName(collegeName);
 		college.setPhone(phone);
 		if(collegeId == "") {
+			college.setState(-1);
 			collegeMapper.addCollege(college);
 		} else {
 			int id = Integer.parseInt(collegeId);
@@ -69,15 +71,15 @@ public class CollegeController {
 	}
 	
 	/**
-	 * 通过学年及学期获取学院信息及当前状态
+	 * 获取学院信息
 	 * @param year
 	 * @param semester
 	 * @return
 	 */
-	@RequestMapping(value = "/get_colleges_and_state", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@RequestMapping(value = "/get_colleges", method = RequestMethod.POST)
 	@ResponseBody
-	public String getCollegeMessageByAdmin(@RequestParam int year, @RequestParam int semester) {
-		List<College> list = collegeMapper.getCollegesAndState();
+	public String getColleges() {
+		List<College> list = collegeMapper.getColleges();
 		String str = MainUtil.getJsonToTable(list);
 		return str;
 	}
