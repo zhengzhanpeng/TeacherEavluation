@@ -6,6 +6,6 @@
 		SELECT value FROM some_message WHERE name = #{name};
 	</select>
 	<update id="setValueByName">
-		UPDATE some_message SET value = #{value, jdbcType=VARCHAR} WHERE NAME = #{name, jdbcType=VARCHER};
+		UPDATE some_message SET value = #{value, jdbcType=VARCHAR} WHERE NAME = #{name, jdbcType=VARCHAR};
 	</update>
 </mapper>
