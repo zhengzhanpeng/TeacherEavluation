@@ -6,26 +6,23 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.JavaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hdxy.mapper.CollegeMapper;
 import com.hdxy.mapper.Semester1Mapper;
 import com.hdxy.mapper.Semester2Mapper;
 import com.hdxy.mapper.SomeMessageMapper;
-import com.hdxy.pojo.College;
 import com.hdxy.pojo.ScoreInput;
+import com.hdxy.pojo.ScoreInputShow;
 import com.hdxy.util.MainUtil;
 import com.hdxy.util.ReturnMessageUtil;
 
 @Controller
 @RequestMapping("/admin")
 public class ScoreInputController {
-	
-	@Autowired
-	private CollegeMapper collegeMapper;
 	
 	@Autowired
 	private SomeMessageMapper someMessageMapper;
@@ -50,7 +47,14 @@ public class ScoreInputController {
 	@RequestMapping(value = "/get_colleges_and_state", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String getCollegeMessageByAdmin() {
-		List<College> list = collegeMapper.getCollegesAndState();
+		List<ScoreInputShow> list = null;
+		int semester;
+		semester = Integer.parseInt(someMessageMapper.getValueByName("semester"));
+		if(semester == 1) {
+			list = semester1Mapper.getScoreInputShow();
+		} else if(semester == 2) {
+			list = semester2Mapper.getScoreInputShow();
+		}
 		String str = MainUtil.getJsonToTable(list);
 		return str;
 	}
@@ -112,6 +116,26 @@ public class ScoreInputController {
 		}
         String error = sb.toString(); //获取出错信息，并返回
         if(!error.equals("")) return error;
+		return ReturnMessageUtil.TRUE;
+	}
+	
+	/**
+	 * 修改单个教师的学生评教成绩
+	 * @param scoreInput
+	 * @return
+	 */
+	@RequestMapping(value = "/save_student_score", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	public String saveStudentScore(@ModelAttribute ScoreInput scoreInput) {
+		int year = Integer.parseInt(someMessageMapper.getValueByName("year"));
+		int semester = Integer.parseInt(someMessageMapper.getValueByName("semester"));
+		scoreInput.setYear(year);
+		int result = 0;
+		if(semester == 1) {
+			result = semester1Mapper.setStudentScore(scoreInput);
+		} else if(semester == 2) {
+			result = semester2Mapper.setStudentScore(scoreInput);
+		}
+		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;
 	}
 }

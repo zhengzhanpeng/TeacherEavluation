@@ -30,4 +30,9 @@
 		SELECT null, #{jobNumber}, name, position, #{studentScore} , #{year}
 		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
+	<select id="getScoreInputShow" resultMap="scoreInputShowList">
+		SELECT s.name, s.position, s.jobNumber, s.studentScore c.collegeName, c.phone 
+		FROM semester1 AS s INNER JOIN college AS c ON s.collegeId = c.id
+		WHERE s.year = (SELECT value FROM some_message WHERE name = 'year');
+	</select>
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hdxy.pojo.College;
+import com.hdxy.pojo.ScoreInputShow;
 
 public interface CollegeMapper {
 	

@@ -4,6 +4,7 @@
 <mapper namespace="com.hdxy.mapper.Semester1Mapper" >
     <!-- 用于查询Semester1中的对应学期所有表用到的模型 -->
 	<resultMap type="Semester1" id="semester1List"></resultMap>
+	<resultMap type="ScoreInputShow" id="scoreInputShowList"/>
 	
 	<select id="checkSemester1" resultType="Integer">
 		SELECT id FROM semester1 WHERE jobNumber = #{jobNumber, jdbcType=VARCHAR} AND year = #{year, jdbcType=INTEGER};
@@ -30,4 +31,9 @@
 		SELECT null, #{jobNumber}, name, position, #{studentScore} , #{year}
 		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
+	<select id="getScoreInputShow" resultMap="scoreInputShowList">
+		SELECT s.name, s.position, s.jobNumber, s.studentScore c.collegeName, c.phone 
+		FROM semester1 AS s INNER JOIN college AS c ON s.collegeId = c.id
+		WHERE s.year = (SELECT value FROM some_message WHERE name = 'year');
+	</select>
 </mapper>

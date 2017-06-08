@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hdxy.pojo.ScoreInput;
+import com.hdxy.pojo.ScoreInputShow;
 import com.hdxy.pojo.Semester1;
 
 public interface Semester1Mapper {
@@ -58,6 +59,12 @@ public interface Semester1Mapper {
 	 * @return
 	 */
 	int addStudentScore(ScoreInput scoreInput);
+	
+	/**
+	 * 获取录入学生评教页面要展示的信息
+	 * @return
+	 */
+	List<ScoreInputShow> getScoreInputShow();
 }
 
 
