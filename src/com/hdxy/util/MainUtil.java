@@ -2,8 +2,6 @@ package com.hdxy.util;
 
 import java.util.List;
 
-import com.hdxy.pojo.Semester1;
-import com.hdxy.pojo.Semester2;
 
 import net.sf.json.JSONArray;
 
@@ -18,4 +16,20 @@ public class MainUtil {
 		sb.append("}");
 		return sb.toString();
 	}
+	
+	public static boolean isDouble(String str) {
+		try {
+			Double.parseDouble(str);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
+	}
 }
+
+
+
+
+
+
+

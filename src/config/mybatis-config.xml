@@ -12,5 +12,6 @@
 			<typeAlias alias="TeacherData" type="com.hdxy.pojo.TeacherData"/>
 			<typeAlias alias="Admin" type="com.hdxy.pojo.Admin"/>
 			<typeAlias alias="UserMessage" type="com.hdxy.pojo.UserMessage"/>
+			<typeAlias alias="ScoreInput" type="com.hdxy.pojo.ScoreInput"/>
 	</typeAliases>
 </configuration>

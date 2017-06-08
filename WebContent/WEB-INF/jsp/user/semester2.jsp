@@ -249,7 +249,7 @@
            });
        });
 
-
+		
 
  
        //批量点击编辑按钮
@@ -271,7 +271,7 @@
 			
 		   temp.draw();
 		   $(temp.node()).find(".edit-btn").click();
-    } );	
+    	} );	
    });
     
    </script>

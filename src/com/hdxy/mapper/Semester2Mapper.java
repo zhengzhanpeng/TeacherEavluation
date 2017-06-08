@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.hdxy.pojo.ScoreInput;
 import com.hdxy.pojo.Semester2;
 
 public interface Semester2Mapper {
@@ -42,4 +43,19 @@ public interface Semester2Mapper {
 	 * @return
 	 */
 	List<Semester2> getSemester2s(int collegeIdByUserId);
+	
+	/**
+	 * 通过职工号和学年录入学生评教成绩
+	 * @param jobNumber
+	 * @return
+	 */
+	int setStudentScore(ScoreInput scoreInput);
+	
+	/**
+	 * 通过职工号和学年插入学生评教成绩，
+	 * 以及从teacherData表中读取教师姓名、职称信息一并插入
+	 * @param scoreInput
+	 * @return
+	 */
+	int addStudentScore(ScoreInput scoreInput);
 }

@@ -22,4 +22,12 @@
 	<select id="getSemester1s" resultMap="semester1List">
 		SELECT jobNumber, name, position, superviseScore, peerScore, studentScore, endScore FROM semester1 WHERE collegeId = #{collegeId, jdbcType=INTEGER} AND year = (SELECT value FROM some_message WHERE name = 'year');
 	</select>
+	<update id="setStudentScore" parameterType="ScoreInput">
+		UPDATE semester1 SET s.studentScore = #{studentScore} WHERE jobNumber = #{jobNumber} AND year = #{year};
+	</update>
+	<insert id="addStudentScore" parameterType="ScoreInput">
+		INSERT INTO semester1 (id, jobNumber, name, position, studentScore, year)
+		SELECT null, #{jobNumber}, name, position, #{studentScore} , #{year}
+		FROM teacher_data WHERE jobNumber = #{jobNumber};
+	</insert>
 </mapper>

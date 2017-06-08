@@ -15,4 +15,6 @@ public class ReturnMessageUtil {
 	public final static String COLLEGE_NAME_NOT_EXIST = "学院名称不存在，请刷新后重试";
 	public final static String MESSAGE_NOT_NUMBER = "您输入的信息不是数字，请重新输入";
 	public final static String SEMESTER_WRONG = "学期只分为1、2两种可能";
+	public final static String MESSAGE_WRONG = "传入信息错误，请重试";
+	public final static String SOME_MESSAGE_NUN = "当前学期储存信息不正确，请联系管理员";
 }
