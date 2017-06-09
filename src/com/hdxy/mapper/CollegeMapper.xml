@@ -31,4 +31,10 @@
 	<update id="openAllCollegeState">
 		UPDATE college SET state = 1;
 	</update>
+	<select id="getCollegeByCollegeId" parameterType="Integer" resultType="College">
+		SELECT collegeName, phone FROM college WHERE id = #{collegeId}; 
+	</select>
+	<update id="setPhone">
+		UPDATE college SET phone = #{phone, jdbcType=INTEGER} WHERE id = #{collegeId, jdbcType=INTEGER};
+	</update>
 </mapper>

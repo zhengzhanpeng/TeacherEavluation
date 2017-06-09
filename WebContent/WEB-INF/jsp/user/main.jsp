@@ -11,7 +11,7 @@
 	</head>
 
 	<body>
-		<div class="layui-main">
+		<div>
 			<blockquote class="layui-elem-quote">
 				<h2 style="font-size: 20px"><i class="layui-icon" style="font-size: 25px">&#xe609;</i>&nbsp;&nbsp;邯郸学院教师评价录入系统</h2>
 			</blockquote>

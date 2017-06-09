@@ -116,8 +116,8 @@ layui.define(['element', 'common'], function(exports) {
 			}
 		}
 	};
-	Tab.prototype.on = function(events, callback) {
-
+	Tab.prototype.on = function(click, callback) {
+		alert("123")
 	}
 
 	var tab = new Tab();

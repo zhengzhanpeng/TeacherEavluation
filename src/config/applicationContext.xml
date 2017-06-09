@@ -48,6 +48,8 @@
 				<value>user/index</value>
 				<value>user/get_semester1s</value>
 				<value>user/get_semester2s</value>
+				<value>user/college_information</value>
+				<value>user/set_phone</value>
 			</list>
 		</property>
 		<property name="adminUrls">
@@ -66,6 +68,9 @@
 				<value>admin/set_semester</value>
 				<value>admin/score_input</value>
 				<value>admin/get_colleges</value>
+				<value>admin/formula</value>
+				<value>admin/compute_semester</value>
+				<value>admin/save_student_score</value>
 			</list>
 		</property>
 	</bean>

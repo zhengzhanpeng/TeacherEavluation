@@ -69,4 +69,8 @@ public interface CollegeMapper {
 	 * @return
 	 */
 	int openAllCollegeState();
+	
+	College getCollegeByCollegeId(int collegeId);
+	
+	int setPhone(@Param("phone") String phone, @Param("collegeId") int collegeId);
 }

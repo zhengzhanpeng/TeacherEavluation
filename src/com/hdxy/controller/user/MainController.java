@@ -25,10 +25,14 @@ public class MainController {
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String getUserIndex(ModelMap model, @ModelAttribute("collegeId") Integer collegeId) {
 		Integer state = collegeMapper.getState(collegeId);
+		Integer semester = 0;
 		if (state == null) {
-			state = 0;
+			state = -1;
 		}
-		model.addAttribute("semester", someMessageMapper.getValueByName("semester"));
+		if(state == 1) {
+			semester = Integer.parseInt(someMessageMapper.getValueByName("semester"));
+		}
+		model.addAttribute("semester", semester);
 		return "user/index";
 	}
 }
