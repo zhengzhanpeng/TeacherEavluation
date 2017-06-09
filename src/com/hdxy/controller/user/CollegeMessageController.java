@@ -30,7 +30,13 @@ public class CollegeMessageController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/set_phone", method = RequestMethod.GET, produces = "text/html;charset=utf-8")
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public ModelAndView tese(@ModelAttribute("collegeId") Integer collegeId) {
+		ModelAndView mav = new ModelAndView("user/test");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/set_phone", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String setPhone(@RequestParam String phone, @ModelAttribute("collegeId") int collegeId) {
 		int result = collegeMapper.setPhone(phone, collegeId);

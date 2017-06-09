@@ -22,6 +22,10 @@ public class UserPasswordController {
 	@Autowired
 	private UserMapper userMapper;
 	
+	@RequestMapping(value = "set_password", method = RequestMethod.GET)
+	public String getSetPassword() {
+		return "user/set_password";
+	}
 	/**
 	 * 修改用户密码
 	 * @param userId
@@ -41,6 +45,8 @@ public class UserPasswordController {
 		password = EncryptionUtil.getPassword(password, user.getRandom(), "MD5");
 		if(!password.equals(user.getPassword())) return ReturnMessageUtil.PASSOWRD_WRONG;
 		newPassword1 = EncryptionUtil.getPassword(newPassword1, user.getRandom(), "MD5");
+		int result = userMapper.setUserPassword(userId, newPassword1);
+		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;
 	}
 }

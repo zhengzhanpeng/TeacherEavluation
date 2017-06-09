@@ -19,5 +19,9 @@ var navs = [{
 		"title": "学院信息",
 		"icon": "fa-check-square-o",
 		"href": "college_information.html"
+	},{
+		"title": "修改密码",
+		"icon": "fa-check-square-o",
+		"href": "set_password"
 	}]
 }];

@@ -31,7 +31,7 @@
 		<fieldset class="layui-elem-field">
 			<legend>学院信息</legend>
 			
-      <form class="layui-form layui-form-pane" action="">
+      <form class="layui-form layui-form-pane" action=""  onsubmit="return false;">
         <div class="layui-form-item">
           <label class="layui-form-label">学院名称</label>
           <div class="layui-input-block">
@@ -52,39 +52,32 @@
 		</fieldset>
 		
 	</div>
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
  
 <!-- jQuery -->
 <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
  
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
 <script type="text/javascript" charset="utf8" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
-	<script type="text/javascript">
-		layui.use(['laydate', 'jquery', 'form'], function() {
-			var $ = layui.jquery;
-			$("#date").click(function() {
-				layui.laydate({
-					elem: this
-				});
-			});
-		});
+	<script>
+	layui.use(['layer', 'form'], function() {
+		var layer = layui.layer,
+			$ = layui.jquery,
+			form = layui.form();
+		$("#save").click(function () {
+	   		$.post("set_phone", {phone: $("#phone").val()}, function (data, staus) {
+	   			if(data == 1) {
+	   				layer.msg("保存成功");
+	   			} else {
+	   				layer.msg(data);
+	   			}
+	   		})
+	   	});
+	});
+	
 	</script>
-	
-	<script type="text/javascript">
-  $(function(){
-       	$("#save").click(function () {
-       		$.post("set_phone", {phone: $("phone").val()}, function (data, staus) {
-       			if(data == 1) {
-       				layer.msg("保存成功");
-       			} else {
-       				layer.msg(data);
-       			}
-       		})
-       	});
-   });
-    
-   </script>
-	
 </body>
 </html>
