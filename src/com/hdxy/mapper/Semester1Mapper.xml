@@ -27,8 +27,8 @@
 		UPDATE semester1 SET studentScore = #{studentScore} WHERE jobNumber = #{jobNumber} AND year = #{year};
 	</update>
 	<insert id="addStudentScore" parameterType="ScoreInput">
-		INSERT INTO semester1 (id, jobNumber, name, position, studentScore, year)
-		SELECT null, #{jobNumber}, name, position, #{studentScore} , #{year}
+		INSERT INTO semester1 (id, jobNumber, name, position, superviseScore, peerScore, studentScore, year)
+		SELECT null, #{jobNumber}, name, position, 0, 0, #{studentScore} , #{year}
 		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
 	<select id="getScoreInputShow" resultMap="scoreInputShowList">

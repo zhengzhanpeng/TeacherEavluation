@@ -66,6 +66,7 @@ public interface Semester1Mapper {
 	 */
 	List<ScoreInputShow> getScoreInputShow();
 	
+<<<<<<< Updated upstream
 	/**
 	 * 通过传入的计算值计算学期末成绩
 	 * @param superviseScore
@@ -85,6 +86,9 @@ public interface Semester1Mapper {
 	 * @return
 	 */
 	double getAvgEndScore(int year);
+=======
+	
+>>>>>>> Stashed changes
 }
 
 
