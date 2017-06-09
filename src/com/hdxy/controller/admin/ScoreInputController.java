@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hdxy.mapper.Semester1Mapper;
@@ -44,7 +45,7 @@ public class ScoreInputController {
 	 * @param semester
 	 * @return
 	 */
-	@RequestMapping(value = "/get_colleges_and_state", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@RequestMapping(value = "/get_teachers", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String getCollegeMessageByAdmin() {
 		List<ScoreInputShow> list = null;
@@ -100,16 +101,15 @@ public class ScoreInputController {
 				sb.append("第" + i + 1 + "行评教成绩非数字形式<br />");
 				continue;
 			}
+			s.setYear(year);
 			if(semester == 1) {
 				result = semester1Mapper.setStudentScore(s); //若result为0，则说明该职工号不存在，则插入一行新数据
 				if(result == 0) {
-					s.setYear(year);
 					semester1Mapper.addStudentScore(s);
 				}
 			} else if(semester == 2) {
 				result = semester2Mapper.setStudentScore(s);
 				if(result == 0) {
-					s.setYear(year);
 					semester2Mapper.addStudentScore(s);
 				}
 			}
@@ -125,7 +125,11 @@ public class ScoreInputController {
 	 * @return
 	 */
 	@RequestMapping(value = "/save_student_score", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
-	public String saveStudentScore(@ModelAttribute ScoreInput scoreInput) {
+	@ResponseBody
+	public String saveStudentScore(@RequestParam String jobNumber, @RequestParam Double studentScore) {
+		ScoreInput scoreInput = new ScoreInput();
+		scoreInput.setJobNumber(jobNumber);
+		scoreInput.setStudentScore(studentScore.toString());
 		int year = Integer.parseInt(someMessageMapper.getValueByName("year"));
 		int semester = Integer.parseInt(someMessageMapper.getValueByName("semester"));
 		scoreInput.setYear(year);

@@ -4,8 +4,8 @@
 <mapper namespace="com.hdxy.mapper.Semester2Mapper" >
 	<!-- 用于查询Semester2中的对应学期所有表用到的模型 -->
 	<resultMap type="Semester2" id="semester2List">
-		
 	</resultMap>
+	<resultMap type="ScoreInputShow" id="scoreInputShowList"></resultMap>
 	<select id="checkSemester2" resultType="Integer">
 		SELECT id FROM semester2 WHERE jobNumber = #{jobNumber, jdbcType=VARCHAR} AND year = #{year, jdbcType=INTEGER};
 	</select>
@@ -23,7 +23,7 @@
 		SELECT jobNumber, name, position, superviseScore, peerScore, teachScore, studentScore, endScore FROM semester2 WHERE collegeId = #{collegeId} AND year = (SELECT value FROM some_message WHERE name = 'year');
 	</select>
 	<update id="setStudentScore" parameterType="ScoreInput">
-		UPDATE semester2 SET s.studentScore = #{studentScore} WHERE jobNumber = #{jobNumber} AND year = #{year};
+		UPDATE semester2 SET studentScore = #{studentScore} WHERE jobNumber = #{jobNumber} AND year = #{year};
 	</update>
 	<insert id="addStudentScore" parameterType="ScoreInput">
 		INSERT INTO semester2 (id, jobNumber, name, position, studentScore, year)
@@ -31,8 +31,8 @@
 		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
 	<select id="getScoreInputShow" resultMap="scoreInputShowList">
-		SELECT s.name, s.position, s.jobNumber, s.studentScore c.collegeName, c.phone 
-		FROM semester1 AS s INNER JOIN college AS c ON s.collegeId = c.id
+		SELECT s.name, s.position, s.jobNumber, s.studentScore, c.collegeName, c.phone 
+		FROM semester2 AS s INNER JOIN college AS c ON s.collegeId = c.id
 		WHERE s.year = (SELECT value FROM some_message WHERE name = 'year');
 	</select>
 </mapper>

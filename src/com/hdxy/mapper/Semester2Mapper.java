@@ -11,10 +11,10 @@ import com.hdxy.pojo.Semester2;
 public interface Semester2Mapper {
 	
 	/**
-	 * 通过教师职工号、所查学年获取相应学期的提交状态
+	 * 通过教师职工号、所查学年检验是否存在对应数据
 	 * @param jobNumber
 	 * @param year
-	 * @return 若为待录入教师成绩则返回1， 否则返回0
+	 * @return 
 	 */
 	Integer checkSemester2(@Param("jobNumber") String jobNumber, @Param("year") int year);
 	

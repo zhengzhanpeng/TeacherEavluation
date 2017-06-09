@@ -24,7 +24,7 @@
 		SELECT jobNumber, name, position, superviseScore, peerScore, studentScore, endScore FROM semester1 WHERE collegeId = #{collegeId, jdbcType=INTEGER} AND year = (SELECT value FROM some_message WHERE name = 'year');
 	</select>
 	<update id="setStudentScore" parameterType="ScoreInput">
-		UPDATE semester1 SET s.studentScore = #{studentScore} WHERE jobNumber = #{jobNumber} AND year = #{year};
+		UPDATE semester1 SET studentScore = #{studentScore} WHERE jobNumber = #{jobNumber} AND year = #{year};
 	</update>
 	<insert id="addStudentScore" parameterType="ScoreInput">
 		INSERT INTO semester1 (id, jobNumber, name, position, studentScore, year)
@@ -32,7 +32,7 @@
 		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
 	<select id="getScoreInputShow" resultMap="scoreInputShowList">
-		SELECT s.name, s.position, s.jobNumber, s.studentScore c.collegeName, c.phone 
+		SELECT s.name, s.position, s.jobNumber, s.studentScore, c.collegeName, c.phone 
 		FROM semester1 AS s INNER JOIN college AS c ON s.collegeId = c.id
 		WHERE s.year = (SELECT value FROM some_message WHERE name = 'year');
 	</select>
