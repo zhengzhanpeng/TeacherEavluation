@@ -65,6 +65,26 @@ public interface Semester1Mapper {
 	 * @return
 	 */
 	List<ScoreInputShow> getScoreInputShow();
+	
+	/**
+	 * 通过传入的计算值计算学期末成绩
+	 * @param superviseScore
+	 * @param peerScore
+	 * @param studentScore
+	 * @return
+	 */
+	int computeEndScore(@Param("superviseScore") double superviseScore
+			, @Param("peerScore") double peerScore
+			, @Param("studentScore") double studentScore
+			, @Param("year") int year);
+	
+	/**
+	 * 获取指定学年的期末成绩平均值
+	 * 计算时不包括督导成绩和同行成绩为0的教师成绩
+	 * @param year
+	 * @return
+	 */
+	double getAvgEndScore(int year);
 }
 
 

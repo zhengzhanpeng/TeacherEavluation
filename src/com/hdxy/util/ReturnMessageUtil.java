@@ -16,5 +16,6 @@ public class ReturnMessageUtil {
 	public final static String MESSAGE_NOT_NUMBER = "您输入的信息不是数字，请重新输入";
 	public final static String SEMESTER_WRONG = "学期只分为1、2两种可能";
 	public final static String MESSAGE_WRONG = "传入信息错误，请重试";
-	public final static String SOME_MESSAGE_NUN = "当前学期储存信息不正确，请联系管理员";
+	public final static String SOME_MESSAGE_NUN = "当前学期储存信息不正确，请与管理员联系";
+	public final static String FORMULA_WRONG = "获取计算公式错误，请与管理员联系";
 }

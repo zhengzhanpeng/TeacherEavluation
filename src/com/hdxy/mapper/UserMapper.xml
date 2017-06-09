@@ -26,6 +26,6 @@
 		u.collegeId = c.id; 
 	</select>
 	<update id="setUserPassword">
-		UPDATE user SET password = #{passowrd, jdbcType=VARCHAR} WHERE id = #{userId, jdbcType=INTEGER};
+		UPDATE user SET password = #{password, jdbcType=VARCHAR} WHERE id = #{userId, jdbcType=INTEGER};
 	</update>
 </mapper>

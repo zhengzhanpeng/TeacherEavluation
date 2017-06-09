@@ -35,4 +35,13 @@
 		FROM semester2 AS s INNER JOIN college AS c ON s.collegeId = c.id
 		WHERE s.year = (SELECT value FROM some_message WHERE name = 'year');
 	</select>
+	<update id="computeEndScore">
+		UPDATE semester2 SET endScore = superviseScore * #{superviseScore, jdbcType=DOUBLE} + 
+		peerScore * #{peerScore, jdbcType=DOUBLE} + studentScore * #{studentScore, jdbcType=DOUBLE}
+		WHERE year = #{year, jdbcType=INTEGER};
+	</update>
+	<select id="getAvgEndScore" parameterType="Integer" resultType="Integer">
+		SELECT AVG(endScore) FROM semester2 WHERE (superviseScore != 0 OR peerScore != 0) 
+		AND year = #{year, jdbcType=INTEGER};
+	</select>
 </mapper>
