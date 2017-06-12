@@ -34,7 +34,7 @@ public class UserPasswordController {
 	 * @param newPassword2
 	 * @return 除返回字符串“1”外，其余都返回为错误信息
 	 */
-	@RequestMapping(value = "/set_password", method = RequestMethod.POST)
+	@RequestMapping(value = "/set_password", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String setPassword(@ModelAttribute("userId") Integer userId
 			    			 ,@RequestParam String password

@@ -15,7 +15,7 @@
 	<body class="beg-login-bg">
 		<div class="beg-login-box">
 			<header>
-				<h1>易买系统登录</h1>
+				<h1>邯郸学院教师考评系统</h1>
 			</header>
 			<div class="beg-login-main">
 				<form class="layui-form" onsubmit="return false;">
@@ -46,12 +46,13 @@
 				</form>
 			</div>
 			<footer>
-				<p>Beginner © </p>
+				<p id="time">copyRight  ©<a href="www.hdc.edu.cn">邯郸学院  </a>  2016-</p>
 			</footer>
 		</div>
 		<script type="text/javascript" src="../plugins/layui/layui.js"></script>
 		<script>
 			var semester;
+			
 			function toIndex() {
 				window.location.href="index";
 			}
@@ -59,9 +60,12 @@
 				var layer = layui.layer,
 					$ = layui.jquery,
 					form = layui.form();
+				 var time = new Date( ); //获得当前时间
+			     var year = time.getFullYear();
+			     $("#time").append(year);
 				$("#login").click(function () {
 					$.post("login", {
-						"userName": $("#user-name").val()
+						"adminName": $("#user-name").val()
 						, "password": $("#password").val()
 					}, function (data, status) {
 						if(data == "1" || data == "2") {
@@ -70,7 +74,7 @@
 							setTimeout("toIndex()", 500);
 							
 						} else {
-							layer.msg(data, {icon: 5, anim: 6});
+							layer.msg(data, {icon: 5, anim: 6,offset: '100px'});
 						}
 					}); 
 					

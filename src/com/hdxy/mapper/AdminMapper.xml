@@ -8,4 +8,7 @@
 	<select id="getAdminByAdminId" parameterType="Integer" resultType="Admin">
 		SELECT password, random FROM admin WHERE id = #{adminId};
 	</select>
+	<insert id="addAdmin" parameterType="Admin">
+		INSERT INTO admin(id, adminName, password, random) VALUES(null, #{adminName}, #{password}, #{random});
+	</insert>
 </mapper>

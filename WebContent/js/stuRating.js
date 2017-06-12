@@ -34,14 +34,17 @@ $(function(){
 			   "url":"score_input",
 			   "data":data,
 			   "type":"post",
-			   	"dataType":'json',  
 				"contentType": "application/json;charset=utf-8",
 			   "error":function(){
 				   alert("服务器未正常响应，请重试");
 			   },
 			  "success":function(response){
-				   layer.msg('保存成功', {icon: 6,time: 700}); 
-				   location.reload();
+				   if(response == 1) {
+					   layer.msg('保存成功', {icon: 6,time: 700}); 
+					   setTimeout("location.reload()", 800);
+				   } else {
+					   layer.confirm(response, {icon: 3, title:'未成功导入的数据', anim: 6});
+				   }
 			   }
 			});
 		};

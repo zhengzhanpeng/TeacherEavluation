@@ -41,7 +41,7 @@ public class UserVisitInterceptor implements HandlerInterceptor {
 		}
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
-		if(userId != null) {
+		if(userId != null && userId != 0) {
 			return true;
 		}
 		request.getRequestDispatcher("login").forward(request, response);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,22 +40,25 @@ public class CollegeController {
 	 */
 	@RequestMapping(value = "/save_college", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
-	public String addCollege(@RequestParam String collegeName, @RequestParam String phone, @RequestParam String collegeId) {
+	public String addCollege(@RequestParam String collegeName, @RequestParam String phone, @RequestParam String id) {
 		if(collegeName == "") {
 			return ReturnMessageUtil.COLLEGE_NAME_IS_NULL;
 		}
 		College college = new College();
 		college.setCollegeName(collegeName);
 		college.setPhone(phone);
-		if(collegeId == "") {
+		int idInt = 0;
+		if(id == "") {
 			college.setState(-1);
 			collegeMapper.addCollege(college);
+			idInt = collegeMapper.getCollegeIdByCollegeName(collegeName);
 		} else {
-			int id = Integer.parseInt(collegeId);
-			college.setId(id);
+			int id1 = Integer.parseInt(id);
+			college.setId(id1);
 			collegeMapper.updateCollege(college);
+			idInt = id1;
 		}
-		return ReturnMessageUtil.TRUE;
+		return ReturnMessageUtil.TRUE + "-" + idInt; //
 	}
 	
 	/**

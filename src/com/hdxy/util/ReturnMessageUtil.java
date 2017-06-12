@@ -18,4 +18,6 @@ public class ReturnMessageUtil {
 	public final static String MESSAGE_WRONG = "传入信息错误，请重试";
 	public final static String SOME_MESSAGE_NUN = "当前学期储存信息不正确，请与管理员联系";
 	public final static String FORMULA_WRONG = "获取计算公式错误，请与管理员联系";
+	public final static String NOT_COMPUTE = "对不起，当前没有可计算的成绩";
+	
 }

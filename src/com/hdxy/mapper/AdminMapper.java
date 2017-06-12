@@ -8,4 +8,6 @@ public interface AdminMapper {
 	Admin getAdminByAdminName(String adminName);
 
 	Admin getAdminByAdminId(Integer adminId);
+	
+	int addAdmin(Admin admin);
 }

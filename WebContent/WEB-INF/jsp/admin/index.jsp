@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="../css/global.css" media="all" />
 <link rel="stylesheet" type="text/css"
 	href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-<script type="text/javascript"> var semester = ${semester};</script>
 </head>
 
 <body>
@@ -119,21 +118,12 @@
 		<script type="text/javascript" src="../js/jquery-1.12.3.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.tabledit.min.js"></script>
 		<script type="text/javascript" src="../plugins/layui/layui.js"></script>
-		<script type="text/javascript" src="../datas/nav.js"></script>
+		<script type="text/javascript" src="../datas/nav_admin.js"></script>
 
 		<script type="text/javascript" src="../js/index.js"></script>
 		<script>
 		var time = new Date( ); //获得当前时间
 	     var year = time.getFullYear();
-	     $("#time").append(year);
-				if(semester==1){
-					$("#semester a").html("第一学期可编辑提交");
-				}else if(semester==2){
-					$("#semester a").html("第二学期可编辑提交");
-				}else{
-					$("#semester a").html("当前不可编辑提交");
-				}
-		      
 			</script>
 	</div>
 </body>

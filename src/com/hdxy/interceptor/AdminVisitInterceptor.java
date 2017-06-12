@@ -41,7 +41,7 @@ public class AdminVisitInterceptor implements HandlerInterceptor {
 		}
 		HttpSession session = request.getSession();
 		Integer adminId = (Integer) session.getAttribute("adminId");
-		if(adminId != null) {
+		if(adminId != null && adminId != 0) {
 			return true;
 		}
 		request.getRequestDispatcher("login").forward(request, response);  //添加g（高）  保密

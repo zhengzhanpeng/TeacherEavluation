@@ -13,7 +13,7 @@
 		DELETE FROM college WHERE id = #{id};
 	</delete>
 	<update id="updateCollege" parameterType="College">
-		UPDATE college SET collegeName = #{collegeName}, phone = #{phone} WHERE collegeId = #{collegeId};
+		UPDATE college SET collegeName = #{collegeName}, phone = #{phone} WHERE id = #{id};
 	</update>
 	<select id="getCollegesAndState" resultMap="collegeList">
 		SELECT id, collegeName, phone, state FROM college;

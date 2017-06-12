@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.hdxy.mapper.AdminMapper;
 import com.hdxy.mapper.Semester1Mapper;
 import com.hdxy.mapper.SomeMessageMapper;
 import com.hdxy.mapper.UserMapper;
+import com.hdxy.pojo.Admin;
 import com.hdxy.pojo.Semester1;
 import com.hdxy.pojo.User;
 import com.hdxy.util.EncryptionUtil;
@@ -22,13 +24,13 @@ public class TestUserMapper {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
 		
-//		UserMapper userMapper = (UserMapper) context.getBean("userMapper");
-//		User user = new User();
-//		user.setPassword("user");
-//		user.setCollegeId(1);
-//		user.setRandom(EncryptionUtil.getRandom());
-//		System.out.println(user.getRandom().length());
-//		user.setPassword(EncryptionUtil.getPassword(user.getPassword(), user.getRandom(), "MD5"));
+		AdminMapper adminMapper = (AdminMapper) context.getBean("adminMapper");
+		Admin admin = new Admin();
+		admin.setPassword("admin");
+		admin.setAdminName("admin");
+		admin.setRandom(EncryptionUtil.getRandom());
+		admin.setPassword(EncryptionUtil.getPassword(admin.getPassword(), admin.getRandom(), "MD5"));
+		adminMapper.addAdmin(admin);
 //		user.setUserName("user1");
 //		userMapper.addUser(user);
 		

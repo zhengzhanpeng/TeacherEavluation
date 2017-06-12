@@ -54,6 +54,7 @@
 		</property>
 		<property name="adminUrls">
 			<list>
+				<value>admin/index</value>
 				<value>admin/set_password</value>
 				<value>admin/save_college</value>
 				<value>admin/delete_college</value>

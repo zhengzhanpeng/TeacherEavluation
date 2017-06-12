@@ -65,7 +65,7 @@ public class ScoreInputController {
 	 * @param data
 	 * @return
 	 */
-	@RequestMapping(value = "/score_input", method = RequestMethod.POST)
+	@RequestMapping(value = "/score_input", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String scoreInput(@RequestBody  String data) {
 		ObjectMapper objectMapper = new ObjectMapper();  
@@ -93,12 +93,12 @@ public class ScoreInputController {
 		}
 		for (int i = 0; i < list.size(); i++) {
 			s = list.get(i);
-			if(s.getJobNumber() == "" || s.getStudentScore() == "") { //若数据有为空，则记录出错行数，跳过此次循环
-				sb.append("第" + i + 1 + "行数据为空<br />");
+			if(s.getJobNumber()== null || s.getStudentScore() == null || s.getJobNumber() == "" || s.getStudentScore() == "") { //若数据有为空，则记录出错行数，跳过此次循环
+				sb.append("第" + (i + 2) + "行数据为空<br/>");
 				continue;
 			}
 			if(!MainUtil.isDouble(s.getStudentScore())) {  //若数据不是double类型，则记录出错行数，跳过此次循环
-				sb.append("第" + i + 1 + "行评教成绩非数字形式<br />");
+				sb.append("第" + (i + 2) + "行数据非数字<br/>");
 				continue;
 			}
 			s.setYear(year);
@@ -115,7 +115,9 @@ public class ScoreInputController {
 			}
 		}
         String error = sb.toString(); //获取出错信息，并返回
-        if(!error.equals("")) return error;
+        if(!error.equals("")) {
+        	return error;
+        }
 		return ReturnMessageUtil.TRUE;
 	}
 	

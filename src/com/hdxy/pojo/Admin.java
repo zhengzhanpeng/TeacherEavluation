@@ -2,21 +2,20 @@ package com.hdxy.pojo;
 
 public class Admin {
 	private int id;
-	private String userName;
+	private String adminName;
 	private String password;
 	private String random;
-	private int year;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUserName() {
-		return userName;
+	public String getAdminName() {
+		return adminName;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
 	}
 	public String getPassword() {
 		return password;
@@ -30,11 +29,4 @@ public class Admin {
 	public void setRandom(String random) {
 		this.random = random;
 	}
-	public int getYear() {
-		return year;
-	}
-	public void setYear(int year) {
-		this.year = year;
-	}
-	
 }
