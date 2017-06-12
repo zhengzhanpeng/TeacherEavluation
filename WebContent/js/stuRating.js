@@ -13,46 +13,56 @@ $(function(){
 		var fileName = $("#importData").val();
 		var point = fileName.lastIndexOf(".");
 		var type = fileName.substr(point);
+		var arr = new Array();
+		arr = fileName.split("\\");
 		//文件非空且为excel文件
-		if(!fileObj||(type!='.xls'&&type!='.xlsx')) {return;}
-		var f = fileObj.files[0];
-		var reader = new FileReader();
-		reader.onload = function(e) {	//定义生成事件
-			var data = e.target.result;
-			if(rABS) {
-				wb = XLSX.read(btoa(fixdata(data)), {//手动转化
-					type: 'base64'
-				});
-			} else {
-				wb = XLSX.read(data, {
-					type: 'binary'
-				});
-			}
-			var jsonData= XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]) ;
-			var data = JSON.stringify(jsonData);
-			$.ajax({	//发起请求
-			   "url":"score_input",
-			   "data":data,
-			   "type":"post",
-				"contentType": "application/json;charset=utf-8",
-			   "error":function(){
-				   alert("服务器未正常响应，请重试");
-			   },
-			  "success":function(response){
-				   if(response == 1) {
-					   layer.msg('保存成功', {icon: 6,time: 700}); 
-					   setTimeout("location.reload()", 800);
-				   } else {
-					   layer.confirm(response, {icon: 3, title:'未成功导入的数据', anim: 6});
-				   }
-			   }
-			});
-		};
-		if(rABS) {	//读取文件
-			reader.readAsArrayBuffer(f);
-		} else {
-			reader.readAsBinaryString(f);
-		}
+		if(!fileObj||(type!='.xls'&&type!='.xlsx')) {
+			 layer.msg("您上传的文件格式不符合要求", {icon: 5, anim: 6});
+			return;}
+		var str12 = "您要上传的文件名称为：" + arr[arr.length - 1] + "，是否确认上传？";
+		 layer.confirm(str12, {icon: 1, title:'确认导入信息', anim: 1}, function (index) {
+			 var f = fileObj.files[0];
+				var reader = new FileReader();
+				reader.onload = function(e) {	//定义生成事件
+					var data = e.target.result;
+					if(rABS) {
+						wb = XLSX.read(btoa(fixdata(data)), {//手动转化
+							type: 'base64'
+						});
+					} else {
+						wb = XLSX.read(data, {
+							type: 'binary'
+						});
+					}
+					var jsonData= XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]) ;
+					var data = JSON.stringify(jsonData);
+					$.ajax({	//发起请求
+					   "url":"score_input",
+					   "data":data,
+					   "type":"post",
+						"contentType": "application/json;charset=utf-8",
+					   "error":function(){
+						   alert("服务器未正常响应，请重试");
+					   },
+					  "success":function(response){
+						   if(response == 1) {
+							   layer.msg('保存成功', {icon: 6,time: 700}); 
+							   setTimeout("location.reload()", 800);
+						   } else {
+							   layer.confirm(response, {icon: 3, title:'未成功导入的数据', anim: 6});
+						   }
+					   }
+					});
+				};
+				if(rABS) {	//读取文件
+					reader.readAsArrayBuffer(f);
+				} else {
+					reader.readAsBinaryString(f);
+				}
+		 }, function (index) {
+			 $(".layui-upload-file").val("");
+		 });
+		
 	});
 	
 	function fixdata(data) { //文件流转BinaryString

@@ -32,7 +32,7 @@
 	  	<button id="batch-save-btn" class="layui-btn">全部提交</button>
 		<div class="layui-box layui-upload-button ">
 			<form target="layui-upload-iframe" method="post" key="set-mine" enctype="multipart/form-data" action="">
-			<input type="file" class="layui-upload-file" name="file" id="importData"> 
+			<input type="file"  class="layui-upload-file" name="file" id="importData"> 
 			<span class="layui-upload-icon">
 			<i class="layui-icon"></i>Excel导入
 			</span>

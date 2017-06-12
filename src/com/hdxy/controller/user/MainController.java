@@ -38,7 +38,9 @@ public class MainController {
 		if(state == 1) {
 			semester = Integer.parseInt(someMessageMapper.getValueByName("semester"));
 		}
+		String collegeName = collegeMapper.getCollegeName(collegeId);
 		model.addAttribute("semester", semester);
+		model.addAttribute("collegeName", collegeName);
 		return "user/index";
 	}
 	

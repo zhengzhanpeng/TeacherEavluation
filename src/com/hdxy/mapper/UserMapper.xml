@@ -18,8 +18,8 @@
 	<select id="getUserByUserId" parameterType="Integer" resultType="User">
 		SELECT password, random FROM user WHERE id = #{id};
 	</select>
-	<delete id="deleteUserByUserId" parameterType="Integer">
-		DELETE FROM user WHERE id = #{id};
+	<delete id="deleteUserByUserName" parameterType="String">
+		DELETE FROM user WHERE userName = #{userName};
 	</delete>
 	<select id="getUsers" resultMap="userList">
 		SELECT u.id, u.userName, c.collegeName, c.phone FROM user AS u INNER JOIN college AS c ON 
@@ -27,5 +27,8 @@
 	</select>
 	<update id="setUserPassword">
 		UPDATE user SET password = #{password, jdbcType=VARCHAR} WHERE id = #{userId, jdbcType=INTEGER};
+	</update>
+	<update id="setUserPasswordByUserName">
+		UPDATE user SET password = #{password, jdbcType=VARCHAR} WHERE userName = #{userName, jdbcType=VARCHAR};
 	</update>
 </mapper>

@@ -5,4 +5,8 @@
 	<select id="checkJobNumber" parameterType="String" resultType="Integer">
 		SELECT id FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</select>
+	<update id="updateTeacher" parameterType="TeacherData">
+		UPDATE teacher_data SET name = #{name}, positison = #{position}
+		WHERE jobNumber = #{jobNumber}; 
+	</update>
 </mapper>

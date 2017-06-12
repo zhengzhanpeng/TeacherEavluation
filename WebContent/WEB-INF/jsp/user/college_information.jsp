@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="../plugins/layui/css/layui.css">
 	<link rel="stylesheet" type="text/css" href="../css/query.css">
 	<link rel="stylesheet" type="text/css" href="../css/jquery.edittable.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<style>
 		.layui-form-label{
 		width:112px  !important; 

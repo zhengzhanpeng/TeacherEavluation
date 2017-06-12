@@ -17,3 +17,35 @@ p {
 	margin-top:0  !important;
 	margin-bottom:0 !important;
 }
+.add-user .layui-form-item{
+	background-color:#e2e2e2;
+	color:#333;
+	width:110px !important;
+   height:38px !important;;
+}
+.add-user .layui-form-item .layui-form-label{
+	width: 110px;
+    padding: 8px 15px;
+    height: 38px;
+    line-height: 20px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px 0 0 2px;
+    text-align: center;
+    background-color: #FBFBFB;
+    white-space: nowrap;
+
+}
+.layui-layer-page .layui-layer-title{
+	padding:0  !important;
+}
+.add-user .layui-input-block select{
+	width: 290px;
+	height: 38px;
+    line-height: 38px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px 0 0 2px;
+    text-align: center;
+}
+.layui-input-block{
+		width:290px  !important;
+		}

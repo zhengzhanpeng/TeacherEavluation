@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hdxy.mapper.CollegeMapper;
 import com.hdxy.mapper.UserMapper;
+import com.hdxy.pojo.College;
 import com.hdxy.pojo.User;
 import com.hdxy.pojo.UserMessage;
 import com.hdxy.util.EncryptionUtil;
@@ -54,8 +56,9 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/delete_user", method = RequestMethod.POST)
-	public String deleteUser(@RequestParam int userId) {
-		int result = userMapper.deleteUserByUserId(userId);
+	@ResponseBody
+	public String deleteUser(@RequestParam String userName) {
+		int result = userMapper.deleteUserByUserName(userName);
 		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;
 	}
@@ -70,12 +73,10 @@ public class UserController {
 	@RequestMapping(value = "/add_user", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String addUser(@RequestParam String userName, @RequestParam String password
-			, @RequestParam String collegeName) {
-		if(userName == "" || password == "" || collegeName == "") {
+			, @RequestParam Integer collegeId) {
+		if(userName == "" || password == "" || collegeId == null) {
 			return ReturnMessageUtil.MESSAGE_IS_NULL;
 		}
-		Integer collegeId = collegeMapper.getCollegeIdByCollegeName(collegeName);
-		if(collegeId == null) return ReturnMessageUtil.COLLEGE_NAME_NOT_EXIST;
 		User user = new User();
 		user.setCollegeId(collegeId);
 		user.setUserName(userName);
@@ -85,7 +86,10 @@ public class UserController {
 		user.setPassword(password);
 		int result = userMapper.addUser(user);
 		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
-		return ReturnMessageUtil.TRUE;
+		College college = collegeMapper.getCollegeByCollegeId(collegeId);
+		StringBuilder sb = new StringBuilder();
+		sb.append("1-").append(college.getPhone()).append("-").append(college.getCollegeName());
+		return sb.toString();
 	}
 	
 	/**
@@ -96,12 +100,20 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/set_user_password", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
-	public String setUserPassword(@RequestParam int userId, @RequestParam String password) {
-		User user = userMapper.getUserByUserId(userId);
-		password = EncryptionUtil.getPassword(password, user.getPassword(), "MD5");
-		int result = userMapper.setUserPassword(userId, password);
+	public String setUserPassword(@RequestParam String userName, @RequestParam String password) {
+		User user = userMapper.getUserByUserName(userName);
+		password = EncryptionUtil.getPassword(password, user.getRandom(), "MD5");
+		int result = userMapper.setUserPasswordByUserName(userName, password);
 		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;
+	}
+	
+	@RequestMapping(value = "add_user_model")
+	public ModelAndView getUserMessageModel() {
+		ModelAndView mav = new ModelAndView("admin/add_user_model");
+		List<College> list = collegeMapper.getColleges();
+		mav.addObject("list", list);
+		return mav;
 	}
 }
 

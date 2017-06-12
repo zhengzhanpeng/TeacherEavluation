@@ -37,4 +37,7 @@
 	<update id="setPhone">
 		UPDATE college SET phone = #{phone, jdbcType=INTEGER} WHERE id = #{collegeId, jdbcType=INTEGER};
 	</update>
+	<select id="getCollegeName" parameterType="Integer" resultType="String">
+		SELECT collegeName FROM college WHERE id = #{collegeId}; 
+	</select>
 </mapper>

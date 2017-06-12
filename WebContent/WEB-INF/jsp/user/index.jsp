@@ -40,7 +40,7 @@
 
 					<li class="layui-nav-item"><a href="javascript:;">浏览网站</a></li>
 					<li class="layui-nav-item"><a href="javascript:;"
-						class="admin-header-user"> <img src="../images/0.jpg" /> <span>邯郸学院</span>
+						class="admin-header-user"> <img src="../images/0.jpg" /> <span>${collegeName }</span>
 					</a>
 						<dl class="layui-nav-child">
 							<dd>
