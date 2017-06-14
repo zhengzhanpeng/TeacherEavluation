@@ -5,6 +5,7 @@
 	<typeAliases>
 			<typeAlias alias="User" type="com.hdxy.pojo.User" />
 			<typeAlias alias="College" type="com.hdxy.pojo.College" />
+			<typeAlias alias="CollegeState" type="com.hdxy.pojo.CollegeState" />
 			<typeAlias alias="DataShow" type="com.hdxy.pojo.DataShow" />
 			<typeAlias alias="EndScore" type="com.hdxy.pojo.EndScore" />
 			<typeAlias alias="Semester1" type="com.hdxy.pojo.Semester1" />

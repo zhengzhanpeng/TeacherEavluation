@@ -30,7 +30,6 @@
 				  <colgroup>
 					  <col/>
 					  <col/>
-					  <col/>
 				      <col/>
 				      <col/>
 					  <col/>
@@ -100,7 +99,6 @@
            "columns": [
                { "data": "jobNumber", "title":"工号","defaultContent":""},
                { "data": "name", "title":"姓名","defaultContent":""},
-			   { "data": "position", "title":"职称","defaultContent":""},
                { "data": "superviseScore", "title":"督导成绩","defaultContent":""},
                { "data": "peerScore", "title":"同行成绩","defaultContent":""},
 			   { "data": "teachScore", "title":"教学业绩考核成绩","defaultContent":""},

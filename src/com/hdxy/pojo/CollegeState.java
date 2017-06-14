@@ -1,11 +1,11 @@
 package com.hdxy.pojo;
 
-public class College {
+public class CollegeState {
 	private int id;
 	private String collegeName;
 	private String phone;
 	/** -1: 录入状态未开启。1：打开了教师录入开关，教师可以录入信息。2：教师已提交录入成绩*/
-	private int state; 
+	private String state; 
 	public int getId() {
 		return id;
 	}
@@ -24,10 +24,10 @@ public class College {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getState() {
+	public String getState() {
 		return state;
 	}
-	public void setState(int state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 	

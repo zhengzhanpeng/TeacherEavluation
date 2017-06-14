@@ -124,6 +124,7 @@
 		<script>
 		var time = new Date( ); //获得当前时间
 	     var year = time.getFullYear();
+	     $("#time").append(year);
 			</script>
 	</div>
 </body>

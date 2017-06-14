@@ -7,7 +7,7 @@ import net.sf.json.JSONArray;
 
 public class MainUtil {
 	
-	public static String getJsonToTable(List list) {
+	public static String getJsonToTable(@SuppressWarnings("rawtypes") List list) {
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		String str =jsonArray.toString();
 		StringBuilder sb = new StringBuilder();

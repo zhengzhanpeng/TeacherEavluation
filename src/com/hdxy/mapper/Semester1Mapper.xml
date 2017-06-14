@@ -11,10 +11,11 @@
 	</select>
 	<insert id="addSemester1" parameterType="Semester1">
 		INSERT INTO semester1 (id, jobNumber, name, position, collegeId, superviseScore, peerScore, date, year) 
-		values(null, #{jobNumber}, #{name}, #{position}, #{collegeId}, #{superviseScore}, #{peerScore}, #{date}, #{year});
+		SELECT null, #{jobNumber}, name, position, #{collegeId}, #{superviseScore}, #{peerScore}, #{date}, #{year} 
+		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
 	<update id="updateSemester1" parameterType="Semester1">
-		UPDATE semester1 SET name = #{name}, position = #{position}, superviseScore = #{superviseScore}, peerScore = #{peerScore}, date = #{date} 
+		UPDATE semester1 SET superviseScore = #{superviseScore}, peerScore = #{peerScore}, date = #{date} 
 		WHERE jobNumber = #{jobNumber} AND year = (SELECT value FROM some_message WHERE name = 'year');
 	</update>
 	<delete id="deleteSemester1">

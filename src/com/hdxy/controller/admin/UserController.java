@@ -84,7 +84,9 @@ public class UserController {
 		user.setRandom(random);
 		password = EncryptionUtil.getPassword(password, random, "MD5");
 		user.setPassword(password);
-		int result = userMapper.addUser(user);
+		int result = userMapper.checkUserName(userName);
+		if(result != 0) return ReturnMessageUtil.USER_IS_EXIST;
+		result = userMapper.addUser(user);
 		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		College college = collegeMapper.getCollegeByCollegeId(collegeId);
 		StringBuilder sb = new StringBuilder();

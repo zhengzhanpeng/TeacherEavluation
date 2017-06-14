@@ -11,10 +11,11 @@
 	</select>
 	<insert id="addSemester2" parameterType="Semester2">
 		INSERT INTO semester2 (id, jobNumber, name, position, collegeId, superviseScore, peerScore, teachScore, date, year) 
-		values(null, #{jobNumber}, #{name}, #{position}, #{collegeId}, #{superviseScore}, #{peerScore}, #{teachScore}, #{date}, #{year});
+		SELECT null, #{jobNumber}, name, position, #{collegeId}, #{superviseScore}, #{peerScore}, #{teachScore}, #{date}, #{year} 
+		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
 	<update id="updateSemester2" parameterType="Semester2">
-		UPDATE semester2 SET name = #{name}, position = #{position}, superviseScore = #{superviseScore}, peerScore = #{peerScore}, date = #{date} WHERE jobNumber = #{jobNumber};
+		UPDATE semester2 SET superviseScore = #{superviseScore}, peerScore = #{peerScore}, date = #{date} WHERE jobNumber = #{jobNumber};
 	</update>
 	<delete id="deleteSemester2">
 		DELETE FROM semester2 WHERE jobNumber = #{jobNumber, jdbcType=VARCHAR} AND year = #{year, jdbcType=INTEGER};

@@ -30,7 +30,6 @@
 				  <colgroup>
 					  <col/>
 					  <col/>
-					  <col/>
 				      <col/>
 				      <col/>
 				    <col width=30%>
@@ -99,7 +98,6 @@
            "columns": [
                { "data": "jobNumber", "title":"工号","defaultContent":""},
                { "data": "name", "title":"姓名","defaultContent":""},
-			   { "data": "position", "title":"职称","defaultContent":""},
                { "data": "superviseScore", "title":"督导成绩","defaultContent":""},
                { "data": "peerScore", "title":"同行成绩","defaultContent":""},
                { "data": null, "title":"操作","defaultContent": "<button class='edit-btn layui-btn layui-btn-normal' type='button'>编辑</button>  <button class='layui-btn layui-btn-warm' type='button'>删除</button>"}

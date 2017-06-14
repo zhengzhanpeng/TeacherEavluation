@@ -19,5 +19,8 @@ public class ReturnMessageUtil {
 	public final static String SOME_MESSAGE_NUN = "当前学期储存信息不正确，请与管理员联系";
 	public final static String FORMULA_WRONG = "获取计算公式错误，请与管理员联系";
 	public final static String NOT_COMPUTE = "对不起，当前没有可计算的成绩";
+	public final static String COLLEGE_IS_EXIST = "对不起，当前添加学院已存在";
+	public final static String USER_IS_EXIST = "对不起，您输入的用户名已存在";
+	public final static String SCORE_IS_BIGER = "对不起，您输入的成绩不能大于100";
 	
 }

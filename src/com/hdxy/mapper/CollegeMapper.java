@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hdxy.pojo.College;
-import com.hdxy.pojo.ScoreInputShow;
+import com.hdxy.pojo.CollegeState;
 
 public interface CollegeMapper {
 	
@@ -39,7 +39,7 @@ public interface CollegeMapper {
 	 * 获得个学院信息和对应的状态
 	 * @return
 	 */
-	List<College> getCollegesAndState();
+	List<CollegeState> getCollegesAndState();
 	
 	/**
 	 * 通过用户ID、所查学年、所查学期获取相应状态
@@ -65,10 +65,10 @@ public interface CollegeMapper {
 	Integer getCollegeIdByCollegeName(String collegeName);
 	
 	/**
-	 * 打开所有的学院录入开关
+	 * 修改所有的学院录入权限
 	 * @return
 	 */
-	int openAllCollegeState();
+	int setAllCollegeState(int state);
 	
 	College getCollegeByCollegeId(int collegeId);
 	

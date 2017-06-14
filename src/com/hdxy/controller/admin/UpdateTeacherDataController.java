@@ -4,14 +4,12 @@ import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.JavaType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hdxy.mapper.TeacherDataMapper;
 import com.hdxy.pojo.ScoreInput;
 import com.hdxy.pojo.TeacherData;
 import com.hdxy.util.ReturnMessageUtil;
@@ -19,9 +17,6 @@ import com.hdxy.util.ReturnMessageUtil;
 @Controller
 @RequestMapping("/admin")
 public class UpdateTeacherDataController {
-	
-	@Autowired
-	private TeacherDataMapper teacherDataMapper;
 	
 	@RequestMapping(value = "/teacher_data_input", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody

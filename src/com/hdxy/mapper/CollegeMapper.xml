@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdxy.mapper.CollegeMapper" >
 	<resultMap type="College" id="collegeList"></resultMap>
+	<resultMap type="CollegeState" id="collegeStateList"></resultMap>
 	<select id="getColleges" resultMap="collegeList">
 		SELECT collegeName, id, phone FROM college;
 	</select>
@@ -15,8 +16,18 @@
 	<update id="updateCollege" parameterType="College">
 		UPDATE college SET collegeName = #{collegeName}, phone = #{phone} WHERE id = #{id};
 	</update>
-	<select id="getCollegesAndState" resultMap="collegeList">
-		SELECT id, collegeName, phone, state FROM college;
+	<select id="getCollegesAndState" resultMap="collegeStateList">
+		SELECT id, collegeName, phone, 
+		<if test="state == -1">
+			'未开放'
+		</if>
+		<if test="state == 1">
+			'待录入'
+		</if>
+		<if test="state == 2">
+			'已录入'
+		</if>
+		 FROM college;
 	</select>
 	<select id="getState" parameterType="Integer" resultType="Integer">
 		SELECT state FROM college WHERE 
@@ -28,8 +39,8 @@
 	<select id="getCollegeIdByCollegeName" parameterType="String" resultType="Integer">
 		SELECT id FROM college WHERE collegeName = #{collegeName};
 	</select>
-	<update id="openAllCollegeState">
-		UPDATE college SET state = 1;
+	<update id="setAllCollegeState" parameterType="Integer">
+		UPDATE college SET state = #{state};
 	</update>
 	<select id="getCollegeByCollegeId" parameterType="Integer" resultType="College">
 		SELECT collegeName, phone FROM college WHERE id = #{collegeId}; 

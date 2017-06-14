@@ -1,5 +1,7 @@
 package com.hdxy.controller.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hdxy.mapper.CollegeMapper;
 import com.hdxy.mapper.SomeMessageMapper;
+import com.hdxy.pojo.CollegeState;
+import com.hdxy.util.MainUtil;
 import com.hdxy.util.ReturnMessageUtil;
 
 @Controller
@@ -30,6 +34,14 @@ public class CollegeStateController {
 		return "admin/college_state";
 	}
 	
+	@RequestMapping(value = "/get_states", produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String getStates() {
+		List<CollegeState> list = collegeMapper.getCollegesAndState();
+		String str = MainUtil.getJsonToTable(list);
+		return str;
+	}
+	
 	/**
 	 * 打开所有学院状态
 	 * @return
@@ -37,7 +49,19 @@ public class CollegeStateController {
 	@RequestMapping(value = "/open_all_college_state", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String openAllCollegeState() {
-		int result = collegeMapper.openAllCollegeState();
+		int result = collegeMapper.setAllCollegeState(1);
+		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
+		return ReturnMessageUtil.TRUE;
+	}
+	
+	/**
+	 * 关闭所有学院状态
+	 * @return
+	 */
+	@RequestMapping(value = "/close_all_college_state", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String closeAllCollegeState() {
+		int result = collegeMapper.setAllCollegeState(-1);
 		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;
 	}
@@ -58,6 +82,21 @@ public class CollegeStateController {
 	}
 	
 	/**
+	 * 关闭指定学院状态
+	 * @param collegeName
+	 * @return
+	 */
+	@RequestMapping(value = "/close_college_state", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String closeCollegeState(@RequestParam String collegeName) {
+		Integer collegeId = collegeMapper.getCollegeIdByCollegeName(collegeName);
+		if(collegeId == null) return ReturnMessageUtil.COLLEGE_NAME_NOT_EXIST;
+		int result = collegeMapper.setState(collegeId, -1);
+		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
+		return ReturnMessageUtil.TRUE;
+	}
+	
+	/**
 	 * 修改当前学期跟学年，修改后所有显示的都以此为准
 	 * @param year
 	 * @param semester
@@ -68,6 +107,7 @@ public class CollegeStateController {
 	public String setSemester(@RequestParam String year, @RequestParam String semester) {
 		if(year == "" || semester == "") return ReturnMessageUtil.MESSAGE_IS_NULL;
 		try {
+			@SuppressWarnings("unused")
 			int yearNum = Integer.parseInt(year);
 			int semeser = Integer.parseInt(semester);
 			if(semeser != 1 && semeser != 2) return ReturnMessageUtil.SEMESTER_WRONG;

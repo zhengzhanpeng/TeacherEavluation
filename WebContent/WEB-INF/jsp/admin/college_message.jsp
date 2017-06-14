@@ -26,6 +26,11 @@
 			<legend>数据列表</legend>
 			<div class="layui-field-box">
 				<table class="layui-table" id="layui-table">
+				  <colgroup>
+				    <col width="400">
+				    <col>
+				    <col>
+				  </colgroup>
 				</table>
 		</div>
 		</fieldset>
