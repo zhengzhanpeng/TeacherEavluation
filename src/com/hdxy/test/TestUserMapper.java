@@ -24,13 +24,13 @@ public class TestUserMapper {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
 		
-		AdminMapper adminMapper = (AdminMapper) context.getBean("adminMapper");
-		Admin admin = new Admin();
-		admin.setPassword("admin");
-		admin.setAdminName("admin");
-		admin.setRandom(EncryptionUtil.getRandom());
-		admin.setPassword(EncryptionUtil.getPassword(admin.getPassword(), admin.getRandom(), "MD5"));
-		adminMapper.addAdmin(admin);
+//		AdminMapper adminMapper = (AdminMapper) context.getBean("adminMapper");
+//		Admin admin = new Admin();
+//		admin.setPassword("admin");
+//		admin.setAdminName("admin");
+//		admin.setRandom(EncryptionUtil.getRandom());
+//		admin.setPassword(EncryptionUtil.getPassword(admin.getPassword(), admin.getRandom(), "MD5"));
+//		adminMapper.addAdmin(admin);
 //		user.setUserName("user1");
 //		userMapper.addUser(user);
 		
@@ -42,7 +42,8 @@ public class TestUserMapper {
 //		String year = someMessageMapper.getValueByName("year");
 //		System.out.println(year);
 		
-//		Semester1Mapper semester1Mapper = (Semester1Mapper) context.getBean("semester1Mapper");
+		Semester1Mapper semester1Mapper = (Semester1Mapper) context.getBean("semester1Mapper");
+//		semester1Mapper.checkSemester1("401101", 2016);
 //		Semester1 semester1 = new Semester1();
 //		semester1.setDate(new Date());
 //		semester1.setCollegeId(1);

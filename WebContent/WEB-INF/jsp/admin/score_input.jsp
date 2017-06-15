@@ -30,6 +30,7 @@
 		   
 	  	<button id="batch-edit-btn" class="layui-btn">全部编辑</button>
 	  	<button id="batch-save-btn" class="layui-btn">全部提交</button>
+	  	<button id="batch-compute-btn" class="layui-btn">计算期末成绩</button>
 		<div class="layui-box layui-upload-button ">
 			<form target="layui-upload-iframe" method="post" key="set-mine" enctype="multipart/form-data" action="">
 			<input type="file"  class="layui-upload-file" name="file" id="importData"> 

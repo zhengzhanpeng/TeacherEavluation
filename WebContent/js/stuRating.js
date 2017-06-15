@@ -192,6 +192,24 @@ $(function(){
    $("#batch-save-btn").click(function(){
 	   $(".save-btn").click();
    });
+   
+   //计算期末成绩按钮
+   $("#batch-compute-btn").click(function () {
+	   $.ajax({
+		   "url":"compute_semester",
+		   "type":"get",
+		   "error":function(){
+	    	   layer.msg("系统繁忙，请稍后再试", {icon: 5, anim: 0});
+	       },
+	       "success":function(data){
+	    	   if(data == 1) {
+				   layer.msg('计算完成', {icon: 6,time: 700});
+			   } else {
+				   layer.msg(data, {icon: 5, anim: 0});
+			   }
+	       }
+	   });
+   });
 });  
 
 

@@ -31,7 +31,7 @@ var navs = [{
 	"children": [{
 		"title": "修改计算公式",
 		"icon": "&#xe631;",
-		"href": "college_information.html"
+		"href": "formula"
 	}, {
 		"title": "修改展示信息",
 		"icon": "&#xe631;",

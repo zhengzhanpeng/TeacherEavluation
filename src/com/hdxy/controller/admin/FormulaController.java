@@ -84,6 +84,7 @@ public class FormulaController {
 	}
 	
 	@RequestMapping(value = "/compute_semester", method = RequestMethod.GET)
+	@ResponseBody
 	public synchronized String computeSemester() {
 		Integer semester = null;
 		Integer year = null;
@@ -111,9 +112,9 @@ public class FormulaController {
 	 * @return
 	 */
 	public String computeSemester1(int year) {
-		Double superviseScore = formulaMapper.getValue("superviseScore", "semester1");
-		Double peerScore = formulaMapper.getValue("peerScore", "semester1");
-		Double studentScore = formulaMapper.getValue("studentScore", "semester1");
+		Double superviseScore = formulaMapper.getValue("superviseScore", "endScore1");
+		Double peerScore = formulaMapper.getValue("peerScore", "endScore1");
+		Double studentScore = formulaMapper.getValue("studentScore", "endScore1");
 		if(superviseScore == null || peerScore == null || studentScore == null) {
 			return ReturnMessageUtil.FORMULA_WRONG;
 		}
@@ -128,9 +129,9 @@ public class FormulaController {
 	 * @return
 	 */
 	public String computeSemester2(int year) {
-		Double superviseScore = formulaMapper.getValue("superviseScore", "semester2");
-		Double peerScore = formulaMapper.getValue("peerScore", "semester2");
-		Double studentScore = formulaMapper.getValue("studentScore", "semester2");
+		Double superviseScore = formulaMapper.getValue("superviseScore", "endScore2");
+		Double peerScore = formulaMapper.getValue("peerScore", "endScore2");
+		Double studentScore = formulaMapper.getValue("studentScore", "endScore2");
 		if(superviseScore == null || peerScore == null || studentScore == null) {
 			return ReturnMessageUtil.FORMULA_WRONG;
 		}

@@ -3,9 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdxy.mapper.Semester1Mapper" >
     <!-- 用于查询Semester1中的对应学期所有表用到的模型 -->
-	<resultMap type="Semester1" id="semester1List"></resultMap>
+	<resultMap type="Semester1" id="semester1List">
+		<result  column="jobNumber" property="jobNumber" javaType="java.lang.String"/>  
+	</resultMap>
 	<resultMap type="ScoreInputShow" id="scoreInputShowList"/>
-	
 	<select id="checkSemester1" resultType="Integer">
 		SELECT id FROM semester1 WHERE jobNumber = #{jobNumber, jdbcType=VARCHAR} AND year = #{year, jdbcType=INTEGER};
 	</select>
