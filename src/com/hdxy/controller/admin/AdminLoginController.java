@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.hdxy.mapper.AdminMapper;
 import com.hdxy.pojo.Admin;
 import com.hdxy.util.EncryptionUtil;
+import com.hdxy.util.ReturnMessageUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,17 +28,17 @@ public class AdminLoginController {
 	}
 	
 	/*验证管理员的密码是否正确，如果正确return1，否则return0*/
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
-	public int adminLoginPost(@RequestParam String adminName
+	public String adminLoginPost(@RequestParam String adminName
 							,@RequestParam String password
 							,ModelMap model) {
 		Admin admin = adminMapper.getAdminByAdminName(adminName);
-		password = EncryptionUtil.getPassword(adminName, admin.getRandom(), "MD5");
+		password = EncryptionUtil.getPassword(password, admin.getRandom(), "MD5");
 		if(password.equals(admin.getPassword())) {
 			model.addAttribute("adminId", admin.getId());
-			return 1;
+			return ReturnMessageUtil.TRUE;
 		}
-		return 0;
+		return ReturnMessageUtil.PASSOWRD_WRONG;
 	}
 }

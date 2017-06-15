@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/jsp/admin/college_message.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/admin/college_state.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/admin/score_input.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/admin/user_message.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/user/semester1.jsp=UTF-8

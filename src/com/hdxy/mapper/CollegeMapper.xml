@@ -18,16 +18,12 @@
 	</update>
 	<select id="getCollegesAndState" resultMap="collegeStateList">
 		SELECT id, collegeName, phone, 
-		<if test="state == -1">
-			'未开放'
-		</if>
-		<if test="state == 1">
-			'待录入'
-		</if>
-		<if test="state == 2">
-			'已录入'
-		</if>
-		 FROM college;
+		CASE state 
+		WHEN -1 THEN '未开启'
+		WHEN 1 THEN '待录入'
+		ELSE '已录入'
+		END AS state
+		FROM college;
 	</select>
 	<select id="getState" parameterType="Integer" resultType="Integer">
 		SELECT state FROM college WHERE 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hdxy.mapper.CollegeMapper;
 import com.hdxy.mapper.SomeMessageMapper;
@@ -30,8 +31,11 @@ public class CollegeStateController {
 	 * @return
 	 */
 	@RequestMapping(value = "/college_state", method = RequestMethod.GET)
-	public String getCollegeState() {
-		return "admin/college_state";
+	public ModelAndView getCollegeState() {
+		ModelAndView mav = new ModelAndView("admin/college_state");
+		mav.addObject("year", someMessageMapper.getValueByName("year"));
+		mav.addObject("semester", someMessageMapper.getValueByName("semester"));
+		return mav;
 	}
 	
 	@RequestMapping(value = "/get_states", produces = "text/html;charset=utf-8")
@@ -46,7 +50,7 @@ public class CollegeStateController {
 	 * 打开所有学院状态
 	 * @return
 	 */
-	@RequestMapping(value = "/open_all_college_state", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@RequestMapping(value = "/open_all_college_state", produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String openAllCollegeState() {
 		int result = collegeMapper.setAllCollegeState(1);
@@ -58,7 +62,7 @@ public class CollegeStateController {
 	 * 关闭所有学院状态
 	 * @return
 	 */
-	@RequestMapping(value = "/close_all_college_state", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@RequestMapping(value = "/close_all_college_state", produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String closeAllCollegeState() {
 		int result = collegeMapper.setAllCollegeState(-1);
@@ -68,14 +72,13 @@ public class CollegeStateController {
 	
 	/**
 	 * 开启指定学院状态
-	 * @param collegeName
+	 * @param collegeId
 	 * @return
 	 */
 	@RequestMapping(value = "/open_college_state", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
-	public String openCollegeState(@RequestParam String collegeName) {
-		Integer collegeId = collegeMapper.getCollegeIdByCollegeName(collegeName);
-		if(collegeId == null) return ReturnMessageUtil.COLLEGE_NAME_NOT_EXIST;
+	public String openCollegeState(@RequestParam Integer collegeId) {
+		if(collegeId == null) return ReturnMessageUtil.SYSTEM_BUSY;
 		int result = collegeMapper.setState(collegeId, 1);
 		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;
@@ -83,14 +86,13 @@ public class CollegeStateController {
 	
 	/**
 	 * 关闭指定学院状态
-	 * @param collegeName
+	 * @param collegeId
 	 * @return
 	 */
 	@RequestMapping(value = "/close_college_state", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
-	public String closeCollegeState(@RequestParam String collegeName) {
-		Integer collegeId = collegeMapper.getCollegeIdByCollegeName(collegeName);
-		if(collegeId == null) return ReturnMessageUtil.COLLEGE_NAME_NOT_EXIST;
+	public String closeCollegeState(@RequestParam Integer collegeId) {
+		if(collegeId == null) return ReturnMessageUtil.SYSTEM_BUSY;
 		int result = collegeMapper.setState(collegeId, -1);
 		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;

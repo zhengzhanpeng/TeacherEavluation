@@ -39,7 +39,7 @@ var navs = [{
 	}, {
 		"title": "开启录入权限",
 		"icon": "&#xe631;",
-		"href": "/html/set_password.html"
+		"href": "college_state"
 	}, {
 		"title": "更新教师信息",
 		"icon": "&#xe631;",

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hdxy.mapper.EndScoreMapper;
 import com.hdxy.mapper.FormulaMapper;
@@ -38,6 +40,47 @@ public class FormulaController {
 	@RequestMapping("/formula")
 	public String getFormula() {
 		return "admin/formula";
+	}
+	
+	@RequestMapping(value = "/change_end_score1", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String changeEndScore1(@RequestParam Double v1, @RequestParam Double v2, @RequestParam Double v3) {
+		formulaMapper.setValue("superviseScore", "endScore1", v1);
+		formulaMapper.setValue("peerScore", "endScore1", v2);
+		formulaMapper.setValue("studentScore", "endScore1", v3);
+		return ReturnMessageUtil.TRUE;
+	}
+	
+	@RequestMapping(value = "/change_end_score2", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String changeEndScore2(@RequestParam Double v1, @RequestParam Double v2, @RequestParam Double v3) {
+		formulaMapper.setValue("superviseScore", "endScore2", v1);
+		formulaMapper.setValue("peerScore", "endScore2", v2);
+		formulaMapper.setValue("studentScore", "endScore2", v3);
+		return ReturnMessageUtil.TRUE;
+	}
+	
+	@RequestMapping(value = "/change_m1", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String changeM1(@RequestParam Double v1, @RequestParam Double v2) {
+		formulaMapper.setValue("endScore1", "m1", v1);
+		formulaMapper.setValue("endScore2", "m1", v2);
+		return ReturnMessageUtil.TRUE;
+	}
+	
+	@RequestMapping(value = "/change_m2", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String changeM2(@RequestParam Double v1) {
+		formulaMapper.setValue("teachScore", "m2", v1);
+		return ReturnMessageUtil.TRUE;
+	}
+	
+	@RequestMapping(value = "/change_all", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String changeAll(@RequestParam Double v1, @RequestParam Double v2) {
+		formulaMapper.setValue("m1", "all", v1);
+		formulaMapper.setValue("m2", "all", v2);
+		return ReturnMessageUtil.TRUE;
 	}
 	
 	@RequestMapping(value = "/compute_semester", method = RequestMethod.GET)

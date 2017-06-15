@@ -48,4 +48,8 @@ p {
 }
 .layui-input-block{
 		width:290px  !important;
-		}
+}
+#showTime{
+	width:270px   !important;
+	cursor:default !important;
+}
