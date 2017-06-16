@@ -9,4 +9,8 @@
 		UPDATE teacher_data SET name = #{name}, positison = #{position}
 		WHERE jobNumber = #{jobNumber}; 
 	</update>
+	<select id="checkTeacher" resultType="Integer">
+		SELECT id FROM teacher_data WHERE jobNumber = #{jobNumber, jdbcType=VARCHAR} 
+		AND name LIKE CONCAT('%', #{name, jdbcType=VARCHAR}, '%'); 
+	</select>
 </mapper>

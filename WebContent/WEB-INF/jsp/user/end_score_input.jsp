@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>学生评教成绩录入</title>
+	<title>单学期成绩补录</title>
 	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../plugins/layui/css/layui.css">
 	<link rel="stylesheet" type="text/css" href="../css/query.css">
@@ -15,20 +15,9 @@
 	<div style="margin: 15px">
 		<blockquote class="layui-elem-quote">
 			<h2 style="font-size: 20px" class="layui-inline">
-				<i class="layui-icon" style="font-size: 30px">&#xe629;</i> 学生评教成绩录入</h2>
-		</blockquote>
-		
-		   
+				<i class="layui-icon" style="font-size: 30px">&#xe629;</i> 单学期成绩补录</h2>
+		</blockquote>  
 	  	<button id="batch-edit-btn" class="layui-btn">全部编辑</button>
-	  	<button id="batch-save-btn" class="layui-btn">全部提交</button>
-	  	<button id="batch-compute-btn" class="layui-btn">计算期末成绩</button>
-		<div class="layui-box layui-upload-button ">
-			<form target="layui-upload-iframe" method="post" key="set-mine" enctype="multipart/form-data" action="">
-			<input type="file"  class="layui-upload-file" name="file" id="importData"> 
-			<span class="layui-upload-icon">
-			<i class="layui-icon"></i>Excel导入
-			</span>
-		</div>
 		<hr>
 		<fieldset class="layui-elem-field">
 			<legend>数据列表</legend>
@@ -52,90 +41,18 @@
 		  ,form = layui.form();
 		});
 
-		$('#importData' ).change(function(){  
-			var rABS = false;
-			var file = $("#importData");
-			var fileName = file.val();
-			var fileObj = file[0];
-			var fileName = $("#importData").val();
-			var point = fileName.lastIndexOf(".");
-			var type = fileName.substr(point);
-			var arr = new Array();
-			arr = fileName.split("\\");
-			//文件非空且为excel文件
-			if(!fileObj||(type!='.xls'&&type!='.xlsx')) {
-				 layer.msg("您上传的文件格式不符合要求", {icon: 5, anim: 6});
-				return;}
-			var str12 = "您要上传的文件名称为：" + arr[arr.length - 1] + "，是否确认上传？";
-			 layer.confirm(str12, {icon: 1, title:'确认导入信息', anim: 1}, function (index) {
-				 var f = fileObj.files[0];
-					var reader = new FileReader();
-					reader.onload = function(e) {	//定义生成事件
-						var data = e.target.result;
-						if(rABS) {
-							wb = XLSX.read(btoa(fixdata(data)), {//手动转化
-								type: 'base64'
-							});
-						} else {
-							wb = XLSX.read(data, {
-								type: 'binary'
-							});
-						}
-						var jsonData= XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]) ;
-						var data = JSON.stringify(jsonData);
-						$.ajax({	//发起请求
-						   "url":"score_input",
-						   "data":data,
-						   "type":"post",
-							"contentType": "application/json;charset=utf-8",
-						   "error":function(){
-							   alert("服务器未正常响应，请重试");
-						   },
-						  "success":function(response){
-							   if(response == 1) {
-								   layer.msg('保存成功', {icon: 6,time: 700}); 
-								   setTimeout("location.reload()", 800);
-							   } else {
-								   layer.confirm(response, {icon: 3, title:'未成功导入的数据', anim: 6});
-							   }
-						   }
-						});
-					};
-					if(rABS) {	//读取文件
-						reader.readAsArrayBuffer(f);
-					} else {
-						reader.readAsBinaryString(f);
-					}
-			 }, function (index) {
-				 $(".layui-upload-file").val("");
-			 });
-			
-		});
-		
-		function fixdata(data) { //文件流转BinaryString
-			var o = "",
-				l = 0,
-				w = 10240;
-			for(; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
-			o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
-			return o;
-		}
-		
-		
 		var table = $('#layui-table').DataTable({
 		   "ajax": {
-			   "url": "get_teachers",
+			   "url": "end_score_input",
 			   "dataSrc": "data",//默认为data
 			   "type": "post",
 			   "error":function(){alert("服务器未正常响应，请重试");}
 		   },
 		   "columns": [
-				{ "data": "collegeName", "title":"学院","defaultContent":""},
-				{ "data": "phone", "title":"学院电话","defaultContent":""},
 				{ "data": "jobNumber", "title":"工号","defaultContent":""},
 				{ "data": "name", "title":"姓名","defaultContent":""},
-				{ "data": "position", "title":"职称","defaultContent":""},
-			   { "data": "studentScore", "title":"学生评教成绩","defaultContent":""},
+				{ "data": "semester", "title":"学期","defaultContent":""},
+				{ "data": "endScore", "title":"期末成绩","defaultContent":""},
 			   { "data": null, "title":"操作","defaultContent": "<button class='edit-btn layui-btn layui-btn-normal' type='button'>编辑</button> "}
 		   ],
 		   "language": {
@@ -182,8 +99,11 @@
 		   var thisObj=$(this);
 		   var row=table.row($(this).parents("tr"));
 		   var tds=$(this).parents("tr").children("td");
-		   var jobNumber = tds.eq(2).text().trim();
-		   var strRateScore = tds.eq(5).children("input").val();
+		   var jobNumber = tds.eq(0).text().trim();
+		   var itemName=tds.eq(1).text().trim();
+		   var  semester=tds.eq(2).text().trim();
+		   var str = semester == 1? "一" : "二";
+		   var endScore = tds.eq(3).children("input").val();
 		  
 		   
 		   /*$.each(tds, function(i,val){
@@ -196,13 +116,15 @@
 			   }
 		   });*/
 		   //var data=row.data();
-		   var jsonData={"jobNumber":jobNumber,"studentScore":strRateScore};
-		   $.ajax({
-			   "url":"save_student_score",
+		   var jsonData={"jobNumber":jobNumber, "name": itemName, "semester":semester,"endScore":endScore};
+		   layer.confirm("确定将教师 <span style='color:#FF5722'>" + itemName+"</span>的第"+ str +"学期期末成绩补录为<span style='color:#FF5722'>"+ endScore + "</span>分吗?（确认后无法修改或二次补录）", {icon: 3, title:'确认补录操作', anim: 6}, function(index){
+				layer.close(index);
+				$.ajax({
+			   "url":"save_end_socre",
 			   "data":jsonData,
 			   "type":"post",
 			   "error":function(){
-	        		   var preBrother = $(this).parent().prev();
+	        		   var preBrother = thisObj.parent().prev();
 	        			var txt =  preBrother.text().trim();
 	        			if(txt=='')txt = 0;
 	        			var html="<input type='text' value='"+txt+"'>";
@@ -212,16 +134,11 @@
 	           },
 	           "success":function(response){
 	               if(response=="1") {
-						
-	            	   tds.eq(5).html(strRateScore);
-	            	   table.cell(tds.eq(5)).data(strRateScore);
-	            	   thisObj.html("编辑");
-	            	   thisObj.toggleClass("edit-btn layui-btn layui-btn-normal");
-	            	   thisObj.toggleClass("save-btn layui-btn ");
-						layer.msg('保存成功', {icon: 6,time: 700}); 
+	            	   table.row(thisObj.parents("tr")).remove().draw(false);
+						layer.msg('录入成功', {icon: 6,time: 700}); 
 				   }
 				   else {
-					   var preBrother = $(this).parent().prev();
+					   var preBrother = thisObj.parent().prev();
 						var txt =  preBrother.text().trim();
 						if(txt=='')txt = 0;
 						var html="<input type='text' value='"+txt+"'>";
@@ -230,39 +147,15 @@
 				   }
 	           }
 		   });
+			});
+		   
 	   });
 
 	   //批量点击编辑按钮
 	   $("#batch-edit-btn").click(function(){
 		   $(".edit-btn").click();
 	   });
-	   $("#batch-save-btn").click(function(){
-		   $(".save-btn").click();
-	   });
-	   
-	   //计算期末成绩按钮
-	   $("#batch-compute-btn").click(function () {
-		   $.ajax({
-			   "url":"compute_semester",
-			   "type":"get",
-			   "error":function(){
-		    	   layer.msg("系统繁忙，请稍后再试", {icon: 5, anim: 0});
-		       },
-		       "success":function(data){
-		    	   if(data == 1) {
-					   layer.msg('计算完成', {icon: 6,time: 700});
-				   } else {
-					   layer.msg(data, {icon: 5, anim: 0});
-				   }
-		       }
-		   });
-	   });
 	});  
-
-
-
-
-
 
 	</script>
 </body>

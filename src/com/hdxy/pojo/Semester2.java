@@ -7,14 +7,14 @@ public class Semester2 {
 	private String jobNumber;
 	private String name;
 	private String position;
-	private int collegeId;
-	private double superviseScore;
-	private double peerScore;
-	private double studentScore;
-	private double teachScore;
-	private double endScore;
+	private Integer collegeId;
+	private Double superviseScore;
+	private Double peerScore;
+	private Double studentScore;
+	private Double teachScore;
+	private Double endScore;
 	private Date date;
-	private int year;
+	private Integer year;
 	public int getId() {
 		return id;
 	}
@@ -39,37 +39,37 @@ public class Semester2 {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	public int getCollegeId() {
+	public Integer getCollegeId() {
 		return collegeId;
 	}
 	public void setCollegeId(int collegeId) {
 		this.collegeId = collegeId;
 	}
-	public double getSuperviseScore() {
+	public Double getSuperviseScore() {
 		return superviseScore;
 	}
 	public void setSuperviseScore(double superviseScore) {
 		this.superviseScore = superviseScore;
 	}
-	public double getPeerScore() {
+	public Double getPeerScore() {
 		return peerScore;
 	}
 	public void setPeerScore(double peerScore) {
 		this.peerScore = peerScore;
 	}
-	public double getStudentScore() {
+	public Double getStudentScore() {
 		return studentScore;
 	}
 	public void setStudentScore(double studentScore) {
 		this.studentScore = studentScore;
 	}
-	public double getTeachScore() {
+	public Double getTeachScore() {
 		return teachScore;
 	}
 	public void setTeachScore(double teachScore) {
 		this.teachScore = teachScore;
 	}
-	public double getEndScore() {
+	public Double getEndScore() {
 		return endScore;
 	}
 	public void setEndScore(double endScore) {
@@ -81,7 +81,7 @@ public class Semester2 {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 	public void setYear(int year) {

@@ -24,6 +24,7 @@
 			<legend>数据列表</legend>
 			<div class="layui-field-box">
 				<table class="layui-table" id="layui-table">
+				
 				</table>
 		</div>
 		</fieldset>
@@ -68,6 +69,13 @@
                		$(this).html("<button class='close-btn layui-btn layui-btn-warm' type='button'>关闭权限</button>");
                	   }
                   });
+        	   $("a").click(function(){
+        		   $(".open-btn").parent().each(function(){
+                   	   if($(this).prev().text()=="待录入"){
+                   		$(this).html("<button class='close-btn layui-btn layui-btn-warm' type='button'>关闭权限</button>");
+                   	   }
+                      });
+        	   })
 
            },
            "language": {

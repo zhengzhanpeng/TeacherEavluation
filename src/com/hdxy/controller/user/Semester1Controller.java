@@ -76,15 +76,20 @@ public class Semester1Controller {
 	@RequestMapping(value = "/add_semester1", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String addSemester1(@ModelAttribute Semester1 semester1, @ModelAttribute("userId") Integer userId) {
-		if(semester1.getJobNumber() == "" || semester1.getName() == "" || semester1.getPeerScore() == 0 || semester1.getSuperviseScore() == 0) {
+		if(semester1.getJobNumber() == "" || semester1.getName() == "" || semester1.getPeerScore() == null || semester1.getSuperviseScore() == null) {
 			return ReturnMessageUtil.MESSAGE_IS_NULL;
 		}
 		if(semester1.getPeerScore() > 100 || semester1.getSuperviseScore() > 100) {
 			return ReturnMessageUtil.SCORE_IS_BIGER;
 		}
+		if(semester1.getPeerScore() < 0 || semester1.getSuperviseScore() < 0) {
+			return ReturnMessageUtil.SCORE_IS_SMALL;
+		}
 		int year = Integer.parseInt(someMessageMapper.getValueByName("year"));
 		Integer reslut = teacherDataMapper.checkJobNumber(semester1.getJobNumber());
 		if(reslut == null) return ReturnMessageUtil.JOB_NUMMBER_NOT_EXIST;
+		reslut = teacherDataMapper.checkTeacher(semester1.getJobNumber(), semester1.getName());
+		if(reslut == null) return ReturnMessageUtil.JOB_NUMMBER_AND_NAME_WRONG;
 		semester1.setDate(new Date());
 		semester1.setYear(year);
 		semester1.setCollegeId(userMapper.getCollegeIdByUserId(userId));

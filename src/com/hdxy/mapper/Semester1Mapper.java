@@ -85,6 +85,13 @@ public interface Semester1Mapper {
 	 * @return
 	 */
 	double getAvgEndScore(int year);
+	
+	/**
+	 * 动态插入semester1内容
+	 * @param s
+	 * @return
+	 */
+	int addSemester1Set(Semester1 s);
 }
 
 

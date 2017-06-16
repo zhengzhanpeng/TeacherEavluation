@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.hdxy.pojo.EndScoreInput;
 import com.hdxy.pojo.ScoreInput;
 import com.hdxy.pojo.ScoreInputShow;
 import com.hdxy.pojo.Semester2;
@@ -85,4 +86,13 @@ public interface Semester2Mapper {
 	 * @return
 	 */
 	double getAvgEndScore(int year);
+	
+	/**
+	 * 通过全联合查询，找出存在其中一个学期为空的信息
+	 * @param collegeId
+	 * @return
+	 */
+	List<EndScoreInput> getEndScoreInput(int collegeId);
+	
+	int addSemester2Set(Semester2 s);
 }

@@ -69,16 +69,34 @@
 			$ = layui.jquery,
 			form = layui.form();
 		$("#save").click(function () {
-	   		$.post("set_phone", {phone: $("#phone").val()}, function (data, staus) {
-	   			if(data == 1) {
-	   				layer.msg("保存成功");
-	   			} else {
-	   				layer.msg(data);
-	   			}
-	   		})
+			if(flagP1){
+				$.post("set_phone", {phone: $("#phone").val()}, function (data, staus) {
+		   			if(data == 1) {
+		   				layer.msg("保存成功");
+		   			} else {
+		   				layer.msg(data);
+		   			}
+		   		})
+			}
+			else{
+				layer.msg("您的输入有误，请认真核对", {icon: 5, anim: 0});
+			}
+	   		
 	   	});
 	});
 	
+	
+	var flagP1=false;
+	reg = /^[0-9]*$/;
+	$("#phone").blur(function(){		
+		if(!reg.test($("#phone").val())){
+			layer.msg("您的输入有误，请认真核对", {icon: 5, anim: 0});
+			flagP1=false;
+		  }
+		else{
+			flagP1=true;
+		}
+	  } );
 	</script>
 </body>
 </html>

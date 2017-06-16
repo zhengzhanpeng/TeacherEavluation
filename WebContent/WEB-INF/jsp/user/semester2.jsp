@@ -1,53 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>第二学期教师成绩录入</title>
-	<link rel="stylesheet" type="text/css" href="../plugins/layui/css/layui.css">
-	<link rel="stylesheet" type="text/css" href="../css/query.css">
-	<link rel="stylesheet" type="text/css" href="../css/jquery.edittable.css">
-	<link  rel="stylesheet" type="text/css" href="../css/main.css">
+<meta charset="UTF-8">
+<title>第二学期教师成绩录入</title>
+<link rel="stylesheet" type="text/css"
+	href="../plugins/layui/css/layui.css">
+<link rel="stylesheet" type="text/css" href="../css/query.css">
+<link rel="stylesheet" type="text/css"
+	href="../css/jquery.edittable.css">
+<link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body>
 	<div style="margin: 15px">
 		<blockquote class="layui-elem-quote">
 			<h2 style="font-size: 20px" class="layui-inline">
-				<i class="layui-icon" style="font-size: 30px">&#xe629;</i> 第二学期教师成绩录入</h2>
+				<i class="layui-icon" style="font-size: 30px">&#xe629;</i>
+				第二学期教师成绩录入
+			</h2>
 		</blockquote>
-		
-			
+
+
 		<button id="addRow" class="layui-btn">添加教师</button>
-	  	<button id="batch-edit-btn" class="layui-btn">全部编辑</button>
-	  	<button id="batch-save-btn" class="layui-btn">全部保存</button>
+		<button id="batch-edit-btn" class="layui-btn">全部编辑</button>
+		<button id="batch-save-btn" class="layui-btn">全部保存</button>
 		<button id="batch-submit-btn" class="layui-btn layui-btn-danger">提交</button>
 		<hr>
 		<fieldset class="layui-elem-field">
 			<legend>数据列表</legend>
 			<div class="layui-field-box">
 				<table class="layui-table" id="layui-table">
-				  <colgroup>
-					  <col/>
-					  <col/>
-				      <col/>
-				      <col/>
-					  <col/>
-				    <col width=30%>
-				  </colgroup>
+					<colgroup>
+						<col />
+						<col />
+						<col />
+						<col />
+						<col />
+						<col width=30%>
+					</colgroup>
 				</table>
-		</div>
+			</div>
 		</fieldset>
 	</div>
-	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
- 
-<!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
- 
-<!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
-<script type="text/javascript" charset="utf8" src="../js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+
+	<!-- jQuery -->
+	<script type="text/javascript" charset="utf8"
+		src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+	<!-- DataTables -->
+	<script type="text/javascript" charset="utf8"
+		src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
+	<script type="text/javascript" charset="utf8"
+		src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
 	<script type="text/javascript">
 		layui.use(['laydate', 'jquery', 'form'], function() {
@@ -59,7 +67,7 @@
 			});
 		});
 	</script>
-	
+
 	<script type="text/javascript">
 	function toIndex() {
 		window.parent.location.reload();
@@ -157,33 +165,35 @@
 			var itemName = rowData.name;
 			//var dtData = dealwithData(oTable02.data());
 			delete rowData["date"];
+			if(!jobNumber){
+				layer.confirm("确定删除未保存的新增教师吗 ？ ", {icon: 3, title:'确认删除操作', anim: 6}, function(index){
+					layer.close(index);
+		            layer.msg('删除成功', {icon: 6,time: 700});
+					table.row(nRow).remove().draw(false);
+				});
+			}else{
 			layer.confirm("确定删除教师   " + itemName+"   吗?", {icon: 3, title:'确认删除操作', anim: 6}, function(index){
-			layer.close(index);
-			$.ajax({
-              "url":"delete_semester2",
-              "data":{"jobNumber":jobNumber},
-               "type":"post",
-               "error":function(){
-            	   layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});
-               },
-               "success":function(response){
-                   if(response=="1") {
-                	   layer.msg('删除成功', {icon: 6,time: 700});
-			           table.row(nRow).remove().draw(false);
-                   } else {
-                	   layer.msg(response, {icon: 5, anim: 0});
-                   }
-
-               }
-           });
+				layer.close(index);
+				$.ajax({
+	              "url":"delete_semester2",
+	              "data":{"jobNumber":jobNumber},
+	               "type":"post",
+	               "error":function(){
+	            	   layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});
+	               },
+	               "success":function(response){
+	                   if(response=="1") {
+	                	   layer.msg('删除成功', {icon: 6,time: 700});
+				           table.row(nRow).remove().draw(false);
+	                   } else {
+	                	   layer.msg(response, {icon: 5, anim: 0});
+	                   }
+	
+	               }
+				})
+			});
 			
-});
-			//deleteSemester2
-			//var delFlag = confirm("确定删除教师   " + itemName+"   吗?");
-           //if (delFlag) {
-        //table.row(nRow).remove().draw(false);
-        //dataManager.updateData(finalData);
-   // }
+	};
        });
  
 	   $("#layui-table tbody").on("click",".save-btn",function(){
@@ -273,6 +283,6 @@
    });
     
    </script>
-	
+
 </body>
 </html>

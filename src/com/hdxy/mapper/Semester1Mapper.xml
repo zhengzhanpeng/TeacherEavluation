@@ -47,4 +47,38 @@
 		SELECT AVG(endScore) FROM semester1 WHERE (superviseScore != 0 OR peerScore != 0) 
 		AND year = #{year, jdbcType=INTEGER};
 	</select>
+	<insert id="addSemester1Set" parameterType="Semester1">
+		INSERT INTO semester1 values(null 
+		<if test="jobNumber != null">
+			, #{jobNumber}
+		</if>
+		<if test="name != null">
+			, #{name}
+		</if>
+		<if test="position != null">
+			, #{position}
+		</if>
+		<if test="collegeId != null">
+			, #{collegeId}
+		</if>
+		<if test="superviseScore != null">
+			, #{superviseScore}
+		</if>
+		<if test="peerScore != null">
+			, #{peerScore}
+		</if>
+		<if test="studentScore != null">
+			, #{studentScore}
+		</if>
+		<if test="endScore != null">
+			, #{endScore}
+		</if>
+		<if test="date != null">
+			, #{date}
+		</if>
+		<if test="year != null">
+			, #{year}
+		</if>
+		);
+	</insert>
 </mapper>

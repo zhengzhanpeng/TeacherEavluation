@@ -8,6 +8,7 @@ public class ReturnMessageUtil {
 	public final static String COLLEGE_NAME_IS_NULL = "学院名称不能为空";
 	public final static String MESSAGE_IS_NULL = "录入信息不能为空";
 	public final static String JOB_NUMMBER_NOT_EXIST = "您输入的职工号不存在";
+	public final static String JOB_NUMMBER_AND_NAME_WRONG = "您输入的职工号与姓名不匹配，请检查";
 	public final static String USER_NAME_IS_NULL = "用户名不能为空";
 	public final static String PASSWORD_IS_NULL = "密码不能为空";
 	public final static String USER_NOT_EXIST = "用户不存在";
@@ -22,5 +23,6 @@ public class ReturnMessageUtil {
 	public final static String COLLEGE_IS_EXIST = "对不起，当前添加学院已存在";
 	public final static String USER_IS_EXIST = "对不起，您输入的用户名已存在";
 	public final static String SCORE_IS_BIGER = "对不起，您输入的成绩不能大于100";
+	public final static String SCORE_IS_SMALL = "对不起，您输入的成绩不能小于0";
 	
 }

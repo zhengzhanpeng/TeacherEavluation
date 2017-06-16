@@ -15,5 +15,6 @@
 			<typeAlias alias="UserMessage" type="com.hdxy.pojo.UserMessage"/>
 			<typeAlias alias="ScoreInput" type="com.hdxy.pojo.ScoreInput"/>
 			<typeAlias alias="ScoreInputShow" type="com.hdxy.pojo.ScoreInputShow"/>
+			<typeAlias alias="EndScoreInput" type="com.hdxy.pojo.EndScoreInput"/>
 	</typeAliases>
 </configuration>

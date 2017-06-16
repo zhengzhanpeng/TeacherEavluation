@@ -20,6 +20,14 @@ var navs = [{
 		"icon": "fa-check-square-o",
 		"href": "score_input.html"
 	}, {
+		"title": "开启录入权限",
+		"icon": "&#xe631;",
+		"href": "college_state"
+	}, {
+		"title": "修改计算公式",
+		"icon": "&#xe631;",
+		"href": "formula"
+	}, {
 		"title": "已录入成绩查询",
 		"icon": "fa-check-square-o",
 		"href": "/html/set_password.html"
@@ -29,17 +37,9 @@ var navs = [{
 	"icon": "&#xe614",
 	"spread": false,
 	"children": [{
-		"title": "修改计算公式",
-		"icon": "&#xe631;",
-		"href": "formula"
-	}, {
 		"title": "修改展示信息",
 		"icon": "&#xe631;",
 		"href": "/html/set_password.html"
-	}, {
-		"title": "开启录入权限",
-		"icon": "&#xe631;",
-		"href": "college_state"
 	}, {
 		"title": "更新教师信息",
 		"icon": "&#xe631;",

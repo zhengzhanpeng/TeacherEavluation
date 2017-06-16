@@ -3,9 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdxy.mapper.Semester2Mapper" >
 	<!-- 用于查询Semester2中的对应学期所有表用到的模型 -->
-	<resultMap type="Semester2" id="semester2List">
-	</resultMap>
-	<resultMap type="ScoreInputShow" id="scoreInputShowList"></resultMap>
+	<resultMap type="Semester2" id="semester2List"/>
+	<resultMap type="EndScoreInput" id="endScoreInputList"/>
+	<resultMap type="ScoreInputShow" id="scoreInputShowList"/>
 	<select id="checkSemester2" resultType="Integer">
 		SELECT id FROM semester2 WHERE jobNumber = #{jobNumber, jdbcType=VARCHAR} AND year = #{year, jdbcType=INTEGER};
 	</select>
@@ -15,7 +15,7 @@
 		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
 	<update id="updateSemester2" parameterType="Semester2">
-		UPDATE semester2 SET superviseScore = #{superviseScore}, peerScore = #{peerScore}, date = #{date} WHERE jobNumber = #{jobNumber};
+		UPDATE semester2 SET superviseScore = #{superviseScore}, peerScore = #{peerScore}, teachScore = #{teachScore}, date = #{date} WHERE jobNumber = #{jobNumber};
 	</update>
 	<delete id="deleteSemester2">
 		DELETE FROM semester2 WHERE jobNumber = #{jobNumber, jdbcType=VARCHAR} AND year = #{year, jdbcType=INTEGER};
@@ -45,4 +45,84 @@
 		SELECT AVG(endScore) FROM semester2 WHERE (superviseScore != 0 OR peerScore != 0) 
 		AND year = #{year, jdbcType=INTEGER};
 	</select>
+	<select id="getEndScoreInput" parameterType="Integer" resultMap="endScoreInputList">
+		SELECT s1.jobNumber AS jobNumber, s1.name AS name, 2 AS semester
+		FROM semester1 AS s1 LEFT OUTER JOIN semester2 AS s2 ON s2.jobNumber = s1.jobNumber
+		WHERE s1.collegeId = #{collegeId} AND s2.jobNumber is null
+		UNION
+		SELECT s1.jobNumber AS jobNumber, s1.name AS name, 1 AS semester
+		FROM semester2 AS s1 LEFT OUTER JOIN semester1 AS s2 ON s2.jobNumber = s1.jobNumber
+		WHERE s1.collegeId = #{collegeId} AND s2.jobNumber IS NULL ;
+	</select>
+	<insert id="addSemester2Set" parameterType="Semester2">
+		INSERT INTO semester2(id
+		<if test="jobNumber != null">
+			, jobNumber
+		</if>
+		<if test="name != null">
+			, name
+		</if>
+		<if test="position != null">
+			, position
+		</if>
+		<if test="collegeId != null">
+			, collegeId
+		</if>
+		<if test="superviseScore != null">
+			, superviseScore
+		</if>
+		<if test="peerScore != null">
+			, peerScore
+		</if>
+		<if test="studentScore != null">
+			, studentScore
+		</if>
+		<if test="teachScore != null">
+			, teachScore
+		</if>
+		<if test="endScore != null">
+			, endScore
+		</if>
+		<if test="date != null">
+			, date
+		</if>
+		<if test="year != null">
+			, year
+		</if>
+		) values(null 
+		<if test="jobNumber != null">
+			, #{jobNumber}
+		</if>
+		<if test="name != null">
+			, #{name}
+		</if>
+		<if test="position != null">
+			, #{position}
+		</if>
+		<if test="collegeId != null">
+			, #{collegeId}
+		</if>
+		<if test="superviseScore != null">
+			, #{superviseScore}
+		</if>
+		<if test="peerScore != null">
+			, #{peerScore}
+		</if>
+		<if test="studentScore != null">
+			, #{studentScore}
+		</if>
+		<if test="teachScore != null">
+			, #{teachScore}
+		</if>
+		<if test="endScore != null">
+			, #{endScore}
+		</if>
+		<if test="date != null">
+			, #{date}
+		</if>
+		<if test="year != null">
+			, #{year}
+		</if>
+		);
+	</insert>
 </mapper>

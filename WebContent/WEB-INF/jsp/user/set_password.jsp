@@ -47,7 +47,7 @@
 		 <div class="layui-form-item">
           <label class="layui-form-label">新密码</label>
           <div class="layui-input-block">
-            <input type="password"  name="title"  id="password" placeholder="请输入新密码"  class="layui-input">
+            <input type="password"  name="title"  id="password" placeholder="请输入新密码(6-20位的字母或数字)"  class="layui-input">
           </div>
 		  <span id="passwordAdd" class="add"><span>
         </div>

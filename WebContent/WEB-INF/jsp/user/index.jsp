@@ -19,7 +19,8 @@
 <link rel="stylesheet" href="../css/global.css" media="all" />
 <link rel="stylesheet" type="text/css"
 	href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
-<script type="text/javascript"> var semester = ${semester};</script>
+<script type="text/javascript"> var semester = ${semester};  var endScoreInputState=${endScoreInputState};
+</script>
 </head>
 
 <body>

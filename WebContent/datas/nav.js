@@ -10,6 +10,10 @@ var navs = [{
 		"title": "第二学期成绩",
 		"icon": "&#xe63c;",
 		"href": "semester2.html"
+	}, {
+		"title": "补录期末成绩",
+		"icon": "&#xe63c;",
+		"href": "end_score_input"
 	}]
 }, {	
 	"title": "信息管理",

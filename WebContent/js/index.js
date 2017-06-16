@@ -30,6 +30,32 @@ layui.config({
 	//渲染navbar
 	navbar.render();
 	//监听点击事件
+	if(endScoreInputState==1){
+		layer.open({
+		        type: 1
+		        ,title: false //不显示标题栏
+		        ,closeBtn: false
+		        ,area: '300px;'
+		        ,shade: 0.8
+		        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+		        ,btn: ['确定', '取消']
+		        ,moveType: 1 //拖拽模式，0或者1
+		        ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">本学院存在需补录的期末成绩，请及时补录。</div>'
+		        ,success: function(layero){
+		          var btn = layero.find('.layui-layer-btn');
+		          btn.css('text-align', 'center');
+		        }
+		      });
+	}
+	
+	$(".fa-user-circle").parent("a").click(function(){
+			$("a[data-url='college_information.html']").click();
+		}
+		)
+	$(".fa-gear").parent("a").click(function(){
+			$("a[data-url='set_password']").click();
+		}
+		)
 	navbar.on('click(side)', function(data) {
 		if((data.field.href=="semester2.html"&&semester!=2)||(data.field.href=="semester1.html"&&semester!=1)){
 			layer.open({
@@ -48,8 +74,24 @@ layui.config({
 		        }
 		      });
 			        
+		}else if(endScoreInputState!=1&&data.field.href=="end_score_input"){
+				layer.open({
+		        type: 1
+		        ,title: false //不显示标题栏
+		        ,closeBtn: false
+		        ,area: '300px;'
+		        ,shade: 0.8
+		        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+		        ,btn: ['确定', '取消']
+		        ,moveType: 1 //拖拽模式，0或者1
+		        ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">此功能需在第二学期成绩录入提交后方可开启</div>'
+		        ,success: function(layero){
+		          var btn = layero.find('.layui-layer-btn');
+		          btn.css('text-align', 'center');
+		        }
+		      });
 		}
-			 else tab.tabAdd(data.field);
+		 else tab.tabAdd(data.field)
 		//$(".layui-nav-child a").hide();
 		
 	});
