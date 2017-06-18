@@ -8,17 +8,17 @@
 		SELECT name, position, m1, m2, all FROM end_score 
 		WHERE collegeId = #{collegeId} AND year = (SELECT value FROM some_message WHERE name = 'year');
 	</select>
-	<select id="getScoreToCompute" parameterType="Integer" resultMap="scoreToComputeList">
+	<select id="geScoreToCompute" parameterType="Integer" resultMap="scoreToComputeList">
 		SELECT s1.jobNumber, s1.endScore AS endScore1, s2.endScore AS endScore2, s2.teachScore 
-		FROM semester1 AS s1 INNER JOIN semester2 AS s2 ON s1.jobNumber = s2.jobNumber WHERE year = #{year};
+		FROM semester1 AS s1 INNER JOIN semester2 AS s2 ON s1.jobNumber = s2.jobNumber WHERE s1.year = #{year} AND s2.year = #{year};
 	</select>
 	<update id="setEndScore">
-		UPDATE end_socre SET m1 = #{endScore1} * #{endScore1MUL} + #{endScore2} * #{endScore2MUL},
-		 m2 = #{teachScore} * #{teachScoreMUL}, all = m1 * #{m1MUL} + m2 * #{m2MUL}
+		UPDATE end_score SET m1 = #{endScore1} * #{endScore1MUL} + #{endScore2} * #{endScore2MUL},
+		 m2 = #{teachScore} * #{teachScoreMUL}, all1 = m1 * #{m1MUL} + m2 * #{m2MUL}
 		 WHERE jobNumber = #{jobNumber} AND year = #{year};
 	</update>
 	<insert id="addEndScore">
-		INSERT INTO endScore SELECT null, jobNumber, name, position, collegeId, 
+		INSERT INTO end_score SELECT null, jobNumber, name, position, collegeId, 
 		#{endScore1} * #{endScore1MUL} + #{endScore2} * #{endScore2MUL}, #{teachScore} * #{teachScoreMUL}, 
 		(#{endScore1} * #{endScore1MUL} + #{endScore2} * #{endScore2MUL}) * #{m1MUL} + (#{teachScore} * #{teachScoreMUL}) * #{m2MUL}, 
 		#{year}, #{date} FROM semester1 WHERE year = #{year} AND jobNumber = #{jobNumber};

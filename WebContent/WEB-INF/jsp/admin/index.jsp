@@ -120,7 +120,7 @@
 		<script type="text/javascript" src="../plugins/layui/layui.js"></script>
 		<script type="text/javascript" src="../datas/nav_admin.js"></script>
 
-		<script type="text/javascript" src="../js/index.js"></script>
+		<script type="text/javascript" src="../js/index_admin.js"></script>
 		<script>
 		var time = new Date( ); //获得当前时间
 	     var year = time.getFullYear();

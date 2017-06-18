@@ -13,4 +13,7 @@
 		SELECT id FROM teacher_data WHERE jobNumber = #{jobNumber, jdbcType=VARCHAR} 
 		AND name LIKE CONCAT('%', #{name, jdbcType=VARCHAR}, '%'); 
 	</select>
+	<select id="getTeacher" parameterType="String" resultType="TeacherData">
+		SELECT * FROM teacher_data WHERE jobNumber = #{jobNumber};
+	</select>
 </mapper>

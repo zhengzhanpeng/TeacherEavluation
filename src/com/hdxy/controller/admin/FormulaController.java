@@ -83,7 +83,7 @@ public class FormulaController {
 		return ReturnMessageUtil.TRUE;
 	}
 	
-	@RequestMapping(value = "/compute_semester", method = RequestMethod.GET)
+	@RequestMapping(value = "/compute_semester", method = RequestMethod.GET, produces="text/html;charset=utf-8")
 	@ResponseBody
 	public synchronized String computeSemester() {
 		Integer semester = null;
@@ -141,8 +141,6 @@ public class FormulaController {
 	}
 	
 	public String computeEndScore(int year) {
-		double endScore1AVG = semester1Mapper.getAvgEndScore(year);
-		double endScore2AVG = semester2Mapper.getAvgEndScore(year);
 		double endScore1MUL = formulaMapper.getValue("endScore1", "m1");
 		double endScore2MUL = formulaMapper.getValue("endScore2", "m1");
 		double teachScoreMUL = formulaMapper.getValue("teachScore", "m2");
@@ -155,8 +153,7 @@ public class FormulaController {
 		int result;
 		for (int i = 0; i < list.size(); i++) {
 			stc = list.get(i);
-			if(stc.getEndScore1() == null) stc.setEndScore1(endScore1AVG);
-			if(stc.getEndScore2() == null) stc.setEndScore2(endScore2AVG);
+			if(stc.getEndScore1() == null || stc.getEndScore2() == null) continue;
 			if(stc.getTeachScore() == null) stc.setTeachScore(teachScore);
 			stc.setEndScore1MUL(endScore1MUL);
 			stc.setEndScore2MUL(endScore2MUL);

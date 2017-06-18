@@ -33,7 +33,11 @@ public class AdminLoginController {
 	public String adminLoginPost(@RequestParam String adminName
 							,@RequestParam String password
 							,ModelMap model) {
+		if(adminName == null || password == null || adminName == "" || password == "") {
+			return ReturnMessageUtil.MESSAGE_IS_NULL;
+		}
 		Admin admin = adminMapper.getAdminByAdminName(adminName);
+		if(admin == null) return ReturnMessageUtil.USER_NOT_EXIST;
 		password = EncryptionUtil.getPassword(password, admin.getRandom(), "MD5");
 		if(password.equals(admin.getPassword())) {
 			model.addAttribute("adminId", admin.getId());

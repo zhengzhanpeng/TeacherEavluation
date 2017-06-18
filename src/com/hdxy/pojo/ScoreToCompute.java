@@ -12,7 +12,7 @@ public class ScoreToCompute {
 	private Double teachScoreMUL;
 	private Double m1MUL;
 	private Double m2MUL;
-	private int year;
+	private Integer year;
 	private Date date;
 	
 	public String getJobNumber() {
@@ -69,7 +69,7 @@ public class ScoreToCompute {
 	public void setM2MUL(Double m2mul) {
 		m2MUL = m2mul;
 	}
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 	public void setYear(int year) {

@@ -39,7 +39,7 @@
 	<update id="computeEndScore">
 		UPDATE semester2 SET endScore = superviseScore * #{superviseScore, jdbcType=DOUBLE} + 
 		peerScore * #{peerScore, jdbcType=DOUBLE} + studentScore * #{studentScore, jdbcType=DOUBLE}
-		WHERE year = #{year, jdbcType=INTEGER};
+		WHERE year = #{year, jdbcType=INTEGER} AND endScore is null;
 	</update>
 	<select id="getAvgEndScore" parameterType="Integer" resultType="Integer">
 		SELECT AVG(endScore) FROM semester2 WHERE (superviseScore != 0 OR peerScore != 0) 

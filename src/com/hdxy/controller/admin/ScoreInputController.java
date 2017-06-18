@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hdxy.mapper.CollegeMapper;
 import com.hdxy.mapper.Semester1Mapper;
 import com.hdxy.mapper.Semester2Mapper;
 import com.hdxy.mapper.SomeMessageMapper;
+import com.hdxy.mapper.TeacherDataMapper;
 import com.hdxy.pojo.ScoreInput;
 import com.hdxy.pojo.ScoreInputShow;
 import com.hdxy.util.MainUtil;
@@ -32,6 +34,12 @@ public class ScoreInputController {
 	
 	@Autowired
 	private Semester2Mapper semester2Mapper;
+	
+	@Autowired
+	private CollegeMapper collegeMapper;
+	
+	@Autowired
+	private TeacherDataMapper teacherDataMapper;
 
 	@RequestMapping(value = "/score_input", method = RequestMethod.GET)
 	public String getScoreInput() {
@@ -100,11 +108,22 @@ public class ScoreInputController {
 				sb.append("第" + (i + 2) + "行数据非数字<br/>");
 				continue;
 			}
+			Integer result1 = teacherDataMapper.checkJobNumber(s.getJobNumber());
+			if(result1 == null || result1 == 0) {
+				sb.append("第" + (i + 2) + "行职工号不存在<br/>");
+				continue;
+			}
+			Integer collegeId = collegeMapper.getCollegeIdByCollegeName(s.getCollegeName());
+			if(collegeId == null) {
+				sb.append("第" + (i + 2) + "行学院名称不存在<br/>");
+				continue;
+			}
+			s.setCollegeId(collegeId);
 			s.setYear(year);
 			if(semester == 1) {
 				result = semester1Mapper.setStudentScore(s); //若result为0，则说明该职工号不存在，则插入一行新数据
 				if(result == 0) {
-					semester1Mapper.addStudentScore(s);
+					semester1Mapper.addStudentScore(s); 
 				}
 			} else if(semester == 2) {
 				result = semester2Mapper.setStudentScore(s);
