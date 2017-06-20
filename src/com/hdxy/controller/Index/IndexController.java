@@ -63,7 +63,7 @@ public class IndexController {
 	@ResponseBody
 	public String getSemester2(@RequestParam int collegeId) {
 		List<Semester2> semester2List = semester2Mapper.getSemester2s(collegeId);
-		String str = MainUtil.getJsonToTable(semester2List);
+		String str = MainUtil.getJsonToTable2(semester2List);
 		return str;
 	}
 	
@@ -71,7 +71,7 @@ public class IndexController {
 	@ResponseBody
 	public String getEndScore(@RequestParam int collegeId) {
 		List<EndScore> endScoreList = endScoreMapper.getEndScores(collegeId);
-		String str = MainUtil.getJsonToTable(endScoreList);
+		String str = MainUtil.getJsonToTable3(endScoreList);
 		return str;
 	}
 }

@@ -1,70 +1,93 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
-<html>
+	
+	<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>邯郸学院教职工测评成绩查询</title>
-  
-  <link href="../css/docs.min.css" rel="stylesheet">
-  <link href="../css/main_index.css" rel="stylesheet">
-  <script src="../js/jquery-1.12.3.min.js"></script>
-  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-</head> 
+	<meta charset="UTF-8">
+	<title>第二学期教师成绩录入</title>
+	<link rel="stylesheet" type="text/css" href="../plugins/layui/css/layui.css">
+	<link rel="stylesheet" type="text/css" href="../css/query.css">
+	<link rel="stylesheet" type="text/css" href="../css/jquery.edittable.css">
+	<link rel="stylesheet" type="text/css" href="../css/docs.min.css" rel="stylesheet">
+</head>
+<style>
+.panel-primary>.panel-heading{
+    color: #fff;
+    background-color: #009688 !important;
+    border-color: #009688 !important;
+}
+.nav-tabs a{
+	color:#009688 ;
+}
+.panel-primary {
+	border-color:#009688 !important;
+}
+</style>
 <body>
-  <div  class="header">
-    </div>  
-		<div class="center">
-    <div class="panel panel-primary" >
-       <div class="panel-heading text-center" >
-          <h3 class="panel-title">${collegeName}</h3>
-       </div> 
-     <div class="panel">
-        <div class="panel-heading">
-       	  <ul class="nav nav-tabs">
-        	<li class="active"><a href="#semester1" data-toggle="tab">第一学期</a></li>
-            <li ><a href="#semester2" data-toggle="tab" >第二学期</a></li>
-            <li><a href="#all" data-toggle="tab">综合成绩</a></li>         
-          </ul>
-        </div>
-		<a href="index"><button id="returnIndex">返回首页</button></a> 
-      </div> 
-           
-      
+	<div style="margin: 15px">
+		<blockquote class="layui-elem-quote">
+			<h2 style="font-size: 20px" class="layui-inline">
+				<i class="layui-icon" style="font-size: 30px">&#xe629;</i> 成绩展示</h2>
+		</blockquote>
+		<hr>
+		<fieldset class="layui-elem-field">
+			<legend>数据列表</legend>
+				<div class="panel panel-primary" >
+				   <div class="panel-heading text-center" >
+				   </div> 
+				 <div class="panel">
+					<div class="panel-heading">
+					  <ul class="nav nav-tabs">
+						<li class="active"><a href="#semester1" data-toggle="tab">第一学期</a></li>
+						<li ><a href="#semester2" data-toggle="tab" >第二学期</a></li>
+						<li><a href="#all" data-toggle="tab">综合成绩</a></li>         
+					  </ul>
+					</div>
+				  </div> 
+					   
+				  
+				   
+				 <div class="tab-content" style="margin-top:-20px">
+				   <div id="semester1" class="tab-pane active">
+					  <table class="table table-bordered table-striped table-hover">
+					  </table>
+					</div>
+					<div id="semester2" class="tab-pane">
+						<table class="table table-bordered table-striped table-hover">
+					  </table>
+					</div>       
+					<div id="all" class="tab-pane">
+						<table class="table table-bordered table-striped table-hover">
+					  </table>
+					</div>
+				</div>	  
        
-     <div class="tab-content" style="margin-top:-20px">
-       <div id="semester1" class="tab-pane active">
-          <table class="table table-bordered table-striped table-hover">
-          </table>
-        </div>
-        <div id="semester2" class="tab-pane">
-            <table class="table table-bordered table-striped table-hover">
-          </table>
-        </div>       
-        <div id="all" class="tab-pane">
-            <table class="table table-bordered table-striped table-hover">
-          </table>
-        </div>
-    </div>	  
-       
-  </div>
-  </div>
-  <div class="footer">
-  <p>版权所有 © <a href="http://www.hdc.edu.cn">邯郸学院</a> 2016-2017</P>
-  <p> 冀ICP备05002795号 地址：河北省邯郸市邯山区学院北路530号 邮政编码：056005　 </P>
+				</div>
+		</fieldset>
+	</div>
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
  
-  </div>
-  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-  <script>
+<!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+ 
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
+<script type="text/javascript" charset="utf8" src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript">
+		layui.use(['laydate', 'jquery', 'form'], function() {
+			var $ = layui.jquery;
+			$("#date").click(function() {
+				layui.laydate({
+					elem: this
+				});
+			});
+		});
+	</script>
+	
+	<script>
 		  $(document).ready(function(){
 		var collegeId=${collegeId};
 		
@@ -196,5 +219,6 @@
 		
 
   </script>
+	
 </body>
 </html>
