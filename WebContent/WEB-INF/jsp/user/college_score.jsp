@@ -65,13 +65,13 @@
 				</div>
 		</fieldset>
 	</div>
-	<link rel="stylesheet" type="text/css" href="../css/dataTables.css">
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
  
 <!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="../js/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
  
 <!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="../js/dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
 <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
 <script type="text/javascript" charset="utf8" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
@@ -103,7 +103,7 @@
                "url": "get_semester1s",
                "dataSrc": "data",//默认为data
                "type": "post",
-               "error":function(){alert("服务器未正常响应，请重试");}
+               "error":function(){layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});}
            },
            "columns": [
                { "data": "name", "title":"姓名","defaultContent":""},
@@ -143,7 +143,7 @@
                "url": "get_semester2s",
                "dataSrc": "data",//默认为data
                "type": "post",
-               "error":function(){alert("服务器未正常响应，请重试");}
+               "error":function(){layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});}
            },
            "columns": [
               { "data": "name", "title":"姓名","defaultContent":""},
@@ -184,7 +184,7 @@
                "url": "get_end_scores",
                "dataSrc": "data",//默认为data
                "type": "post",
-               "error":function(){alert("服务器未正常响应，请重试");}
+               "error":function(){layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});}
            },
            "columns": [
                { "data": "name", "title":"姓名","defaultContent":""},

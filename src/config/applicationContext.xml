@@ -50,6 +50,11 @@
 				<value>user/get_semester2s</value>
 				<value>user/college_information</value>
 				<value>user/set_phone</value>
+				<value>user/college_score</value>
+				<value>user/get_end_scores</value>
+				<value>user/end_score_input</value>
+				<value>user/save_end_socre</value>
+				<value>user/exit</value>
 			</list>
 		</property>
 		<property name="adminUrls">
@@ -72,6 +77,19 @@
 				<value>admin/formula</value>
 				<value>admin/compute_semester</value>
 				<value>admin/save_student_score</value>
+				<value>admin/exit</value>
+				<value>admin/college_state</value>
+				<value>admin/get_states</value>
+				<value>admin/close_all_college_state</value>
+				<value>admin/close_college_state</value>
+				<value>admin/change_end_score1</value>
+				<value>admin/change_end_score2</value>
+				<value>admin/change_m1</value>
+				<value>admin/change_m2</value>
+				<value>admin/change_all</value>
+				<value>admin/get_teachers</value>
+				<value>admin/teacher_data_input</value>
+				<value>admin/add_user</value>
 			</list>
 		</property>
 	</bean>

@@ -11,4 +11,7 @@
 	<insert id="addAdmin" parameterType="Admin">
 		INSERT INTO admin(id, adminName, password, random) VALUES(null, #{adminName}, #{password}, #{random});
 	</insert>
+	<update id="setPassword">
+		UPDATE admin SET password = #{password, jdbcType=VARCHAR} WHERE id = #{adminId, jdbcType=INTEGER};
+	</update>
 </mapper>

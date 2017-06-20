@@ -8,7 +8,7 @@
   
   <link href="../css/docs.min.css" rel="stylesheet">
   <link href="../css/main_index.css" rel="stylesheet">
-  <script src="../js/jquery-1.12.3.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
   <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -62,8 +62,8 @@
   <p> 冀ICP备05002795号 地址：河北省邯郸市邯山区学院北路530号 邮政编码：056005　 </P>
  
   </div>
-  <link rel="stylesheet" type="text/css" href="../css/dataTables.css">
-  <script type="text/javascript" charset="utf8" src="../js/dataTables.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
   <script>
   function c() {
 		$("#semester2").attr("class", "tab-pane active hidden");
@@ -92,7 +92,7 @@
                "dataSrc": "data",//默认为data
                "data": {"collegeId":collegeId},
                "type": "post",
-               "error":function(){alert("服务器未正常响应，请重试");}
+               "error":function(){layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});}
            },
            "columns": [
                { "data": "name", "title":"姓名","defaultContent":""},
@@ -133,7 +133,7 @@
                "dataSrc": "data2",//默认为data
                "data": {"collegeId":collegeId},
                "type": "post",
-               "error":function(){alert("服务器未正常响应，请重试");}
+               "error":function(){layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});}
            },
            "columns": [
               { "data": "name", "title":"姓名","defaultContent":""},
@@ -175,7 +175,7 @@
                "dataSrc": "data3",//默认为data
                "data": {"collegeId":collegeId},
                "type": "post",
-               "error":function(){alert("服务器未正常响应，请重试");}
+               "error":function(){layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});}
            },
            "columns": [
                { "data": "name", "title":"姓名","defaultContent":""},

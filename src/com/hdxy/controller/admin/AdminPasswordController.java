@@ -22,6 +22,10 @@ public class AdminPasswordController {
 	@Autowired
 	private AdminMapper adminMapper;
 	
+	@RequestMapping(value = "set_password", method = RequestMethod.GET)
+	public String getSetPassword() {
+		return "admin/set_password";
+	}
 	/**
 	 * 修改管理员密码
 	 * @param adminId
@@ -41,6 +45,8 @@ public class AdminPasswordController {
 		password = EncryptionUtil.getPassword(password, admin.getRandom(), "MD5");
 		if(!password.equals(admin.getPassword())) return ReturnMessageUtil.PASSOWRD_WRONG;
 		newPassword1 = EncryptionUtil.getPassword(newPassword1, admin.getRandom(), "MD5");
+		int result = adminMapper.setPassword(adminId, newPassword1);
+		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;
 	}
 }

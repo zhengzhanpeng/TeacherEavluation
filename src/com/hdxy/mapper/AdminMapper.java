@@ -1,5 +1,7 @@
 package com.hdxy.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hdxy.pojo.Admin;
 
 public interface AdminMapper {
@@ -10,4 +12,6 @@ public interface AdminMapper {
 	Admin getAdminByAdminId(Integer adminId);
 	
 	int addAdmin(Admin admin);
+	
+	int setPassword(@Param("adminId") int adminId, @Param("password") String password);
 }

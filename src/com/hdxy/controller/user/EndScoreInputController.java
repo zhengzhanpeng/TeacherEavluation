@@ -72,6 +72,12 @@ public class EndScoreInputController {
 		if(endScoreInput.getJobNumber() == null || endScoreInput.getName() == null || endScoreInput.getEndScore() == null || endScoreInput.getSemester() == null) {
 			return ReturnMessageUtil.MESSAGE_IS_NULL;
 		}
+		if(endScoreInput.getEndScore() > 100) {
+			return ReturnMessageUtil.SCORE_IS_BIGER;
+		}
+		if(endScoreInput.getEndScore() < 0) {
+			return ReturnMessageUtil.SCORE_IS_SMALL;
+		}
 		if(endScoreInput.getSemester() != 1 && endScoreInput.getSemester() != 2) {
 			return ReturnMessageUtil.SYSTEM_BUSY;
 		}

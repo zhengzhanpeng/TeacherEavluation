@@ -11,8 +11,8 @@
 		SELECT id FROM semester1 WHERE jobNumber = #{jobNumber, jdbcType=VARCHAR} AND year = #{year, jdbcType=INTEGER};
 	</select>
 	<insert id="addSemester1" parameterType="Semester1">
-		INSERT INTO semester1 (id, jobNumber, name, position, collegeId, superviseScore, peerScore, date, year) 
-		SELECT null, #{jobNumber}, name, position, #{collegeId}, #{superviseScore}, #{peerScore}, #{date}, #{year} 
+		INSERT INTO semester1 (id, jobNumber, name, position, collegeId, superviseScore, peerScore, studentScore, date, year) 
+		SELECT null, #{jobNumber}, name, position, #{collegeId}, #{superviseScore}, #{peerScore}, 0, #{date}, #{year} 
 		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
 	<update id="updateSemester1" parameterType="Semester1">

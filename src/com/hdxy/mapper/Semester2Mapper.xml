@@ -10,8 +10,8 @@
 		SELECT id FROM semester2 WHERE jobNumber = #{jobNumber, jdbcType=VARCHAR} AND year = #{year, jdbcType=INTEGER};
 	</select>
 	<insert id="addSemester2" parameterType="Semester2">
-		INSERT INTO semester2 (id, jobNumber, name, position, collegeId, superviseScore, peerScore, teachScore, date, year) 
-		SELECT null, #{jobNumber}, name, position, #{collegeId}, #{superviseScore}, #{peerScore}, #{teachScore}, #{date}, #{year} 
+		INSERT INTO semester2 (id, jobNumber, name, position, collegeId, superviseScore, peerScore, teachScore, studentScore, date, year) 
+		SELECT null, #{jobNumber}, name, position, #{collegeId}, #{superviseScore}, #{peerScore}, #{teachScore}, 0, #{date}, #{year} 
 		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
 	<update id="updateSemester2" parameterType="Semester2">
@@ -53,6 +53,17 @@
 		SELECT s1.jobNumber AS jobNumber, s1.name AS name, 1 AS semester
 		FROM semester2 AS s1 LEFT OUTER JOIN semester1 AS s2 ON s2.jobNumber = s1.jobNumber
 		WHERE s1.collegeId = #{collegeId} AND s2.jobNumber IS NULL ;
+	</select>
+	<select id="getEndScoreCollege" resultType="String">
+		SELECT collegeName
+		FROM semester1 AS s1 LEFT OUTER JOIN semester2 AS s2 ON s2.jobNumber = s1.jobNumber
+		INNER JOIN college AS c ON s1.collegeId = c.id
+		WHERE s2.jobNumber is null
+		UNION
+		SELECT collegeName
+		FROM semester2 AS s1 LEFT OUTER JOIN semester1 AS s2 ON s2.jobNumber = s1.jobNumber
+		INNER JOIN college AS c ON s1.collegeId = c.id
+		WHERE s2.jobNumber IS NULL ;
 	</select>
 	<insert id="addSemester2Set" parameterType="Semester2">
 		INSERT INTO semester2(id

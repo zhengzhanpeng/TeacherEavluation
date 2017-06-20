@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="../plugins/layui/css/layui.css">
 	<link rel="stylesheet" type="text/css" href="../css/query.css">
 	<link rel="stylesheet" type="text/css" href="../css/jquery.edittable.css">
-	<link rel="stylesheet" type="text/css" href="../css/dataTables.css">
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
 </head>
 <body>
 	<div style="margin: 15px">
@@ -40,8 +40,8 @@
 	</div>
 	<script type="text/javascript" charset="utf8" src="../js/xlsx.full.min.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
-	<script type="text/javascript" charset="utf8" src="../js/jquery-1.12.3.min.js"></script>
-	<script type="text/javascript" charset="utf8" src="../js/dataTables.js"></script>
+	<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" charset="utf8" src="../js/bootstrap.min.js"></script>
 	
 	<script>
@@ -51,7 +51,6 @@
 		  var layer = layui.layer
 		  ,form = layui.form();
 		});
-
 		$('#importData' ).change(function(){  
 			var rABS = false;
 			var file = $("#importData");
@@ -89,7 +88,7 @@
 						   "type":"post",
 							"contentType": "application/json;charset=utf-8",
 						   "error":function(){
-							   alert("服务器未正常响应，请重试");
+							   layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});
 						   },
 						  "success":function(response){
 							   if(response == 1) {
@@ -127,7 +126,7 @@
 			   "url": "get_teachers",
 			   "dataSrc": "data",//默认为data
 			   "type": "post",
-			   "error":function(){alert("服务器未正常响应，请重试");}
+			   "error":function(){layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});}
 		   },
 		   "columns": [
 				{ "data": "collegeName", "title":"学院","defaultContent":""},
@@ -242,19 +241,24 @@
 	   
 	   //计算期末成绩按钮
 	   $("#batch-compute-btn").click(function () {
-		   $.ajax({
-			   "url":"compute_semester",
-			   "type":"get",
-			   "error":function(){
-		    	   layer.msg("系统繁忙，请稍后再试", {icon: 5, anim: 0});
-		       },
-		       "success":function(data){
-		    	   if(data == 1) {
-					   layer.msg('计算完成', {icon: 6,time: 700});
-				   } else {
-					   layer.msg(data, {icon: 5, anim: 0});
-				   }
-		       }
+		   var collegeB = "<p style='color:#FF5722'>${collegeB}。</p>";
+		   var strB = "以下为未能及时补录的学院：<br />";
+		   strB = strB + collegeB + "计算时会略过这些学院中未及时补录的教师，您确定要现在开始计算吗？";
+		   layer.confirm(strB, {icon: 1, title:'确认计算成绩', anim: 1}, function (index) {
+			   $.ajax({
+				   "url":"compute_semester",
+				   "type":"get",
+				   "error":function(){
+			    	   layer.msg("系统繁忙，请稍后再试", {icon: 5, anim: 0});
+			       },
+			       "success":function(data){
+			    	   if(data == 1) {
+						   layer.msg('计算完成', {icon: 6,time: 700});
+					   } else {
+						   layer.msg(data, {icon: 5, anim: 0});
+					   }
+			       }
+			   });
 		   });
 	   });
 	});  

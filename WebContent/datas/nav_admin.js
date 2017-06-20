@@ -44,5 +44,9 @@ var navs = [{
 		"title": "更新教师信息",
 		"icon": "&#xe631;",
 		"href": "/html/set_password.html"
+	}, {
+		"title": "修改密码",
+		"icon": "&#xe631;",
+		"href": "set_password"
 	}]
 }];

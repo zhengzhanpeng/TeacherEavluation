@@ -95,4 +95,10 @@ public interface Semester2Mapper {
 	List<EndScoreInput> getEndScoreInput(int collegeId);
 	
 	int addSemester2Set(Semester2 s);
+	
+	/**
+	 * 查询需要补录的学院
+	 * @return
+	 */
+	List<String> getEndScoreCollege();
 }

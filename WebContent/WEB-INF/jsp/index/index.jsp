@@ -9,7 +9,7 @@
   
   <link href="../css/docs.min.css" rel="stylesheet">
   <link href="../css/main_index.css" rel="stylesheet">
-  <script src="../js/jquery-1.12.3.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
   <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 

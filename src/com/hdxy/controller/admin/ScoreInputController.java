@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hdxy.mapper.CollegeMapper;
 import com.hdxy.mapper.Semester1Mapper;
@@ -41,9 +42,19 @@ public class ScoreInputController {
 	@Autowired
 	private TeacherDataMapper teacherDataMapper;
 
-	@RequestMapping(value = "/score_input", method = RequestMethod.GET)
-	public String getScoreInput() {
-		return "admin/score_input";
+	@RequestMapping(value = "/score_input", method = RequestMethod.GET, produces = "text/html;charset=utf-8")
+	public ModelAndView getScoreInput() {
+		ModelAndView mav = new ModelAndView("admin/score_input");
+		List<String> list = semester2Mapper.getEndScoreCollege();
+		StringBuilder sb = new StringBuilder();
+		String str;
+		for (int i = 0; i < list.size(); i++) {
+			str = list.get(i);
+			if(i != 0) sb.append("、");
+			sb.append(str);
+		}
+		mav.addObject("collegeB", sb.toString());
+		return mav;
 	}
 	
 	/**
