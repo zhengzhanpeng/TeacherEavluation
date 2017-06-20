@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/query.css">
 	<link rel="stylesheet" type="text/css" href="../css/jquery.edittable.css">
 	<link rel="stylesheet" type="text/css" href="../css/docs.min.css" rel="stylesheet">
+	<link  rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <style>
 .panel-primary>.panel-heading{
@@ -39,25 +40,23 @@
 				 <div class="panel">
 					<div class="panel-heading">
 					  <ul class="nav nav-tabs">
-						<li class="active"><a href="#semester1" data-toggle="tab">第一学期</a></li>
-						<li ><a href="#semester2" data-toggle="tab" >第二学期</a></li>
-						<li><a href="#all" data-toggle="tab">综合成绩</a></li>         
+						<li id="l1" class="active"><a href="#semester1" data-toggle="tab">第一学期</a></li>
+						<li id="l2" ><a href="#semester2" data-toggle="tab" >第二学期</a></li>
+						<li id="l3" ><a href="#all" data-toggle="tab">学年考核成绩</a></li>         
 					  </ul>
 					</div>
 				  </div> 
-					   
 				  
-				   
 				 <div class="tab-content" style="margin-top:-20px">
 				   <div id="semester1" class="tab-pane active">
 					  <table class="table table-bordered table-striped table-hover">
 					  </table>
 					</div>
-					<div id="semester2" class="tab-pane">
+					<div id="semester2" class="tab-pane active">
 						<table class="table table-bordered table-striped table-hover">
 					  </table>
 					</div>       
-					<div id="all" class="tab-pane">
+					<div id="all" class="tab-pane active">
 						<table class="table table-bordered table-striped table-hover">
 					  </table>
 					</div>
@@ -66,36 +65,43 @@
 				</div>
 		</fieldset>
 	</div>
-	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.css">
  
 <!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="../js/jquery-1.12.3.min.js"></script>
  
 <!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="../js/dataTables.js"></script>
 <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
 <script type="text/javascript" charset="utf8" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
-	<script type="text/javascript">
-		layui.use(['laydate', 'jquery', 'form'], function() {
-			var $ = layui.jquery;
-			$("#date").click(function() {
-				layui.laydate({
-					elem: this
-				});
-			});
-		});
-	</script>
+	
 	
 	<script>
-		  $(document).ready(function(){
-		var collegeId=${collegeId};
+		function c() {
+			$("#semester2").attr("class", "tab-pane active hidden");
+			$("#all").attr("class", "tab-pane active hidden");
+		}
+	
+		$(document).ready(function(){
+			setTimeout("c()", 500);
+		$("#l1").click(function () {
+			$("#semester2").attr("class", "tab-pane active hidden");
+			$("#all").attr("class", "tab-pane active hidden");
+		})
+		$("#l2").click(function () {
+			$("#semester2").attr("class", "tab-pane active show");
+			$("#all").attr("class", "tab-pane active hidden");
+		})
+		$("#l3").click(function () {
+			$("#semester2").attr("class", "tab-pane active hidden");
+			$("#all").attr("class", "tab-pane active show");
+		})
 		
 		 var table1 = $('#semester1 table').DataTable({
            "ajax": {
                "url": "get_semester1s",
                "dataSrc": "data",//默认为data
-               "data": {"collegeId":collegeId},
                "type": "post",
                "error":function(){alert("服务器未正常响应，请重试");}
            },
@@ -135,8 +141,7 @@
 	   var table2 = $('#semester2 table').DataTable({
            "ajax": {
                "url": "get_semester2s",
-               "dataSrc": "data2",//默认为data
-               "data": {"collegeId":collegeId},
+               "dataSrc": "data",//默认为data
                "type": "post",
                "error":function(){alert("服务器未正常响应，请重试");}
            },
@@ -147,7 +152,7 @@
                { "data": "peerScore", "title":"同行成绩","defaultContent":""},
 			   { "data": "studentScore", "title":"学生评教成绩","defaultContent":""},
 			   { "data": "teachScore", "title":"教学业绩考核成绩","defaultContent":""},
-			   { "data": "endScore2", "title":"第二学期期末成绩","defaultContent":""}
+			   { "data": "endScore", "title":"第二学期期末成绩","defaultContent":""}
            ],
            "language": {
                "sProcessing": "处理中...",
@@ -177,8 +182,7 @@
 	   var table3 = $('#all table').DataTable({
            "ajax": {
                "url": "get_end_scores",
-               "dataSrc": "data3",//默认为data
-               "data": {"collegeId":collegeId},
+               "dataSrc": "data",//默认为data
                "type": "post",
                "error":function(){alert("服务器未正常响应，请重试");}
            },

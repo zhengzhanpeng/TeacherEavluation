@@ -14,6 +14,10 @@ var navs = [{
 		"title": "补录期末成绩",
 		"icon": "&#xe63c;",
 		"href": "end_score_input"
+	}, {
+		"title": "查看学院成绩",
+		"icon": "&#xe63c;",
+		"href": "college_score"
 	}]
 }, {	
 	"title": "信息管理",

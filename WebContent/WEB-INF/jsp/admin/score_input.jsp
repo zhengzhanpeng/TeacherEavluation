@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="../plugins/layui/css/layui.css">
 	<link rel="stylesheet" type="text/css" href="../css/query.css">
 	<link rel="stylesheet" type="text/css" href="../css/jquery.edittable.css">
-	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.css">
 </head>
 <body>
 	<div style="margin: 15px">
@@ -40,8 +40,8 @@
 	</div>
 	<script type="text/javascript" charset="utf8" src="../js/xlsx.full.min.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
-	<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf8" src="../js/jquery-1.12.3.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="../js/dataTables.js"></script>
 	<script type="text/javascript" charset="utf8" src="../js/bootstrap.min.js"></script>
 	
 	<script>

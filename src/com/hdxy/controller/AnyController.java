@@ -10,4 +10,19 @@ public class AnyController {
 	public String toIndex() {
 		return "redirect:/index/index"; 
 	}
+	
+	@RequestMapping("/index/*")
+	public String toIndex1() {
+		return "redirect:/index/index"; 
+	}
+	
+	@RequestMapping("/user/*")
+	public String toIndex2() {
+		return "redirect:/user/index"; 
+	}
+	
+	@RequestMapping("/admin/*")
+	public String toIndex3() {
+		return "redirect:/admin/index"; 
+	}
 }

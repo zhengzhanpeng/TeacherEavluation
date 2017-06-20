@@ -9,7 +9,7 @@ import com.hdxy.pojo.UserMessage;
 
 public interface UserMapper {
 	User getUserByUserName(String userName);
-	int checkUserName(String userName);
+	Integer checkUserName(String userName);
 	int addUser(User user);
 	int getCollegeIdByUserId(int userId);
 	

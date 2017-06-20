@@ -84,7 +84,7 @@ layui.config({
 		        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
 		        ,btn: ['确定', '取消']
 		        ,moveType: 1 //拖拽模式，0或者1
-		        ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">此功能需在第二学期成绩录入提交后方可开启</div>'
+		        ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">此功能在第二学期成绩录入提交后才能开启</div>'
 		        ,success: function(layero){
 		          var btn = layero.find('.layui-layer-btn');
 		          btn.css('text-align', 'center');

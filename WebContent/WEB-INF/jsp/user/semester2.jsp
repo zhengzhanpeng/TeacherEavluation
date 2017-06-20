@@ -44,15 +44,15 @@
 		</fieldset>
 	</div>
 	<link rel="stylesheet" type="text/css"
-		href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+		href="../css/dataTables.css">
 
 	<!-- jQuery -->
 	<script type="text/javascript" charset="utf8"
-		src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		src="../js/jquery-1.12.3.min.js"></script>
 
 	<!-- DataTables -->
 	<script type="text/javascript" charset="utf8"
-		src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+		src="../js/dataTables.js"></script>
 	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
 	<script type="text/javascript" charset="utf8"
 		src="../js/bootstrap.min.js"></script>

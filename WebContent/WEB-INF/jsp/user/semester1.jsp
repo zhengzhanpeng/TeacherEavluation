@@ -38,13 +38,13 @@
 		</div>
 		</fieldset>
 	</div>
-	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.css">
  
 <!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="../js/jquery-1.12.3.min.js"></script>
  
 <!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="../js/dataTables.js"></script>
 <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
 <script type="text/javascript" charset="utf8" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
@@ -147,7 +147,7 @@
        });
 	   
 	   
-	   //删除单行
+       //删除单行
 	   $("#layui-table tbody").on("click",".layui-btn-warm",function(){
            var nRow=$(this).parents('tr')[0];
 		   var rowData = table.row(nRow).data();
@@ -155,35 +155,38 @@
 			var itemName = rowData.name;
 			//var dtData = dealwithData(oTable02.data());
 			delete rowData["date"];
+			if(!jobNumber){
+				layer.confirm("确定删除未保存的新增教师吗 ？ ", {icon: 3, title:'确认删除操作', anim: 6}, function(index){
+					layer.close(index);
+		            layer.msg('删除成功', {icon: 6,time: 700});
+					table.row(nRow).remove().draw(false);
+				});
+			}else{
 			layer.confirm("确定删除教师   " + itemName+"   吗?", {icon: 3, title:'确认删除操作', anim: 6}, function(index){
-			layer.close(index);
-			$.ajax({
-              "url":"delete_semester1",
-              "data":{"jobNumber":jobNumber},
-               "type":"post",
-               "error":function(){
-            	   layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});
-               },
-               "success":function(response){
-                   if(response=="1") {
-                	   layer.msg('删除成功', {icon: 6,time: 700});
-			           table.row(nRow).remove().draw(false);
-                   } else {
-                	   layer.msg(response, {icon: 5, anim: 0});
-                   }
-
-               }
-           });
+				layer.close(index);
+				$.ajax({
+	              "url":"delete_semester1",
+	              "data":{"jobNumber":jobNumber},
+	               "type":"post",
+	               "error":function(){
+	            	   layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});
+	               },
+	               "success":function(response){
+	                   if(response=="1") {
+	                	   layer.msg('删除成功', {icon: 6,time: 700});
+				           table.row(nRow).remove().draw(false);
+	                   } else {
+	                	   layer.msg(response, {icon: 5, anim: 0});
+	                   }
+	
+	               }
+				})
+			});
 			
-});
-			//deleteSemester1
-			//var delFlag = confirm("确定删除教师   " + itemName+"   吗?");
-           //if (delFlag) {
-        //table.row(nRow).remove().draw(false);
-        //dataManager.updateData(finalData);
-   // }
+	};
        });
- 
+       
+       
 	   $("#layui-table tbody").on("click",".save-btn",function(){
            var row=table.row($(this).parents("tr"));
            var thisObj=$(this);

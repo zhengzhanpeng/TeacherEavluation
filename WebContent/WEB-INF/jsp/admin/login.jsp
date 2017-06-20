@@ -15,7 +15,7 @@
 	<body class="beg-login-bg">
 		<div class="beg-login-box">
 			<header>
-				<h1>邯郸学院教师考评系统</h1>
+				<h1>教师考评管理员入口</h1>
 			</header>
 			<div class="beg-login-main">
 				<form class="layui-form" onsubmit="return false;">
