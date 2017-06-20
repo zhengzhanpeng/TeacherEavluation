@@ -5,7 +5,7 @@
 	<resultMap type="EndScore" id="endScoreList"></resultMap>
 	<resultMap type="com.hdxy.pojo.ScoreToCompute" id="scoreToComputeList" />
 	<select id="getEndScores" parameterType="Integer" resultMap="endScoreList">
-		SELECT name, position, m1, m2, all FROM end_score 
+		SELECT name, position, m1, m2, all1 FROM end_score 
 		WHERE collegeId = #{collegeId} AND year = (SELECT value FROM some_message WHERE name = 'year');
 	</select>
 	<select id="geScoreToCompute" parameterType="Integer" resultMap="scoreToComputeList">

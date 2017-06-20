@@ -1,8 +1,5 @@
 package com.hdxy.controller.user;
 
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.hdxy.mapper.CollegeMapper;
 import com.hdxy.mapper.Semester2Mapper;
 import com.hdxy.mapper.SomeMessageMapper;
-import com.hdxy.pojo.EndScoreInput;
 
 @Controller
 @RequestMapping("/user")
