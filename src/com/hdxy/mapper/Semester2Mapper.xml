@@ -23,6 +23,11 @@
 	<select id="getSemester2s" parameterType="Integer" resultMap="semester2List">
 		SELECT jobNumber, name, position, superviseScore, peerScore, teachScore, studentScore, endScore FROM semester2 WHERE collegeId = #{collegeId} AND year = (SELECT value FROM some_message WHERE name = 'year');
 	</select>
+	<select id="getSemester2sToIndex" resultMap="semester2List">
+		SELECT jobNumber, name, position, superviseScore, peerScore, teachScore, studentScore, endScore FROM semester2 
+		WHERE collegeId = #{collegeId, jdbcType=INTEGER} AND year = (SELECT value FROM some_message WHERE name = 'year')
+		ORDER BY endScore DESC LIMIT #{number, jdbcType=INTEGER};
+	</select>
 	<update id="setStudentScore" parameterType="ScoreInput">
 		UPDATE semester2 SET studentScore = #{studentScore} WHERE jobNumber = #{jobNumber} AND year = #{year};
 	</update>

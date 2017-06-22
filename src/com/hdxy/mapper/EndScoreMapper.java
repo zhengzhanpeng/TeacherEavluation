@@ -2,6 +2,8 @@ package com.hdxy.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hdxy.pojo.EndScore;
 import com.hdxy.pojo.ScoreToCompute;
 
@@ -13,6 +15,13 @@ public interface EndScoreMapper {
 	 * @return
 	 */
 	List<EndScore> getEndScores(int collegeId);
+	
+	/**
+	 * 获取当前学年期末总成绩
+	 * @param collegeId
+	 * @return
+	 */
+	List<EndScore> getEndScoresToIndex(@Param("collegeId") int collegeId, @Param("number") int number);
 	
 	/**
 	 * 根据当前学年获取第一学期、第二学期期末成绩、还有教学评教成绩

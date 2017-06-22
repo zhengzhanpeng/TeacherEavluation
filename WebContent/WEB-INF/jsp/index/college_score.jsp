@@ -8,6 +8,7 @@
   
   <link href="../css/docs.min.css" rel="stylesheet">
   <link href="../css/main_index.css" rel="stylesheet">
+  <link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all" />
   <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
   <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -64,6 +65,31 @@
   </div>
   <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
   <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" src="../plugins/layui/layui.js"></script>
+  <script type="text/javascript">
+  function lx() {
+		layer.open({
+	        type: 1
+	        ,title: false //不显示标题栏
+	        ,closeBtn: false
+	        ,area: '300px;'
+	        ,shade: 0.8
+	        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	        ,btn: ['确定', '取消']
+	        ,moveType: 1 //拖拽模式，0或者1
+	        ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">${wisdom}<br/>恭喜各位老师，您已挤入前八名，再接再厉哦！</div>'
+	        ,success: function(layero){
+	          var btn = layero.find('.layui-layer-btn');
+	          btn.css('text-align', 'center');
+	        }
+	      });
+	}
+		layui.use(['layer'], function() {
+			var layer = layui.layer;
+			
+			setTimeout("lx()", 1000);
+		});
+	</script>
   <script>
   function c() {
 		$("#semester2").attr("class", "tab-pane active hidden");
@@ -102,6 +128,7 @@
 			   { "data": "studentScore", "title":"学生评教成绩","defaultContent":""},
 			   { "data": "endScore", "title":"第一学期期末成绩","defaultContent":""}
            ],
+           "order": [[ 5, "desc" ]],
            "language": {
                "sProcessing": "处理中...",
                "sLengthMenu": "显示 _MENU_ 项结果",
@@ -135,6 +162,7 @@
                "type": "post",
                "error":function(){layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});}
            },
+           "order": [[ 5, "desc" ]],
            "columns": [
               { "data": "name", "title":"姓名","defaultContent":""},
 			   { "data": "position", "title":"职称","defaultContent":""},
@@ -177,6 +205,7 @@
                "type": "post",
                "error":function(){layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});}
            },
+           "order": [[ 4, "desc" ]],
            "columns": [
                { "data": "name", "title":"姓名","defaultContent":""},
 			   { "data": "position", "title":"职称","defaultContent":""},

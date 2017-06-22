@@ -46,6 +46,13 @@ public interface Semester1Mapper {
 	List<Semester1> getSemester1s(@Param("collegeId") int collegeId);
 	
 	/**
+	 * 根据collegeId获取相应学院录入的成绩信息，其中year在sql语句中select
+	 * @param collegeId
+	 * @return
+	 */
+	List<Semester1> getSemester1sToIndex(@Param("collegeId") int collegeId, @Param("number") int number);
+	
+	/**
 	 * 通过职工号和学年录入学生评教成绩
 	 * @param jobNumber
 	 * @return

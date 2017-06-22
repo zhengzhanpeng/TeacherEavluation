@@ -8,6 +8,11 @@
 		SELECT name, position, m1, m2, all1 FROM end_score 
 		WHERE collegeId = #{collegeId} AND year = (SELECT value FROM some_message WHERE name = 'year');
 	</select>
+	<select id="getEndScoresToIndex" resultMap="endScoreList">
+		SELECT name, position, m1, m2, all1 FROM end_score 
+		WHERE collegeId = #{collegeId, jdbcType=INTEGER} AND year = (SELECT value FROM some_message WHERE name = 'year')
+		ORDER BY all1 DESC LIMIT #{number, jdbcType=INTEGER};
+	</select>
 	<select id="geScoreToCompute" parameterType="Integer" resultMap="scoreToComputeList">
 		SELECT s1.jobNumber, s1.endScore AS endScore1, s2.endScore AS endScore2, s2.teachScore 
 		FROM semester1 AS s1 INNER JOIN semester2 AS s2 ON s1.jobNumber = s2.jobNumber WHERE s1.year = #{year} AND s2.year = #{year};

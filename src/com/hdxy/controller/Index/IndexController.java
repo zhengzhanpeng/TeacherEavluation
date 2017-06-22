@@ -14,11 +14,14 @@ import com.hdxy.mapper.CollegeMapper;
 import com.hdxy.mapper.EndScoreMapper;
 import com.hdxy.mapper.Semester1Mapper;
 import com.hdxy.mapper.Semester2Mapper;
+import com.hdxy.mapper.SomeMessageMapper;
+import com.hdxy.mapper.WisdomMapper;
 import com.hdxy.pojo.College;
 import com.hdxy.pojo.EndScore;
 import com.hdxy.pojo.Semester1;
 import com.hdxy.pojo.Semester2;
 import com.hdxy.util.MainUtil;
+import com.hdxy.util.ReturnMessageUtil;
 
 @Controller
 @RequestMapping("/index")
@@ -36,6 +39,12 @@ public class IndexController {
 	@Autowired
 	private EndScoreMapper endScoreMapper;
 	
+	@Autowired
+	private SomeMessageMapper someMessageMapper;
+	
+	@Autowired
+	private WisdomMapper wisdomMapper;
+	
 	@RequestMapping(value = "/*", method = RequestMethod.GET)
 	public String getIndex(ModelMap model) {
 		List<College> list = collegeMapper.getColleges();
@@ -47,13 +56,21 @@ public class IndexController {
 	public String getCollegeMessage(@RequestParam int collegeId, ModelMap model) {
 		model.addAttribute("collegeName", collegeMapper.getCollegeName(collegeId));
 		model.addAttribute("collegeId", collegeId);
+		model.addAttribute("wisdom", wisdomMapper.getValueRandom());
 		return "index/college_score";
 	}
 	
 	@RequestMapping(value = "/get_semester1s", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String getSemester1(@RequestParam int collegeId) {
-		List<Semester1> semester1List = semester1Mapper.getSemester1s(collegeId);
+		String strNum = someMessageMapper.getValueByName("semester1Num");
+		Integer number = 0;
+		try {
+			number = Integer.parseInt(strNum);
+		} catch (NumberFormatException e) {
+			return ReturnMessageUtil.MESSAGE_NOT_NUMBER;
+		}
+		List<Semester1> semester1List = semester1Mapper.getSemester1sToIndex(collegeId, number);
 		String str = MainUtil.getJsonToTable(semester1List);
 		return str;
 	}
@@ -61,7 +78,14 @@ public class IndexController {
 	@RequestMapping(value = "/get_semester2s", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String getSemester2(@RequestParam int collegeId) {
-		List<Semester2> semester2List = semester2Mapper.getSemester2s(collegeId);
+		String strNum = someMessageMapper.getValueByName("semester2Num");
+		Integer number = 0;
+		try {
+			number = Integer.parseInt(strNum);
+		} catch (NumberFormatException e) {
+			return ReturnMessageUtil.MESSAGE_NOT_NUMBER;
+		}
+		List<Semester2> semester2List = semester2Mapper.getSemester2sToIndex(collegeId, number);
 		String str = MainUtil.getJsonToTable2(semester2List);
 		return str;
 	}
@@ -69,7 +93,14 @@ public class IndexController {
 	@RequestMapping(value = "/get_end_scores", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String getEndScore(@RequestParam int collegeId) {
-		List<EndScore> endScoreList = endScoreMapper.getEndScores(collegeId);
+		String strNum = someMessageMapper.getValueByName("endScoreNum");
+		Integer number = 0;
+		try {
+			number = Integer.parseInt(strNum);
+		} catch (NumberFormatException e) {
+			return ReturnMessageUtil.MESSAGE_NOT_NUMBER;
+		}
+		List<EndScore> endScoreList = endScoreMapper.getEndScoresToIndex(collegeId, number);
 		String str = MainUtil.getJsonToTable3(endScoreList);
 		return str;
 	}

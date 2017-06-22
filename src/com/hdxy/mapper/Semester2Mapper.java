@@ -47,6 +47,13 @@ public interface Semester2Mapper {
 	List<Semester2> getSemester2s(int collegeIdByUserId);
 	
 	/**
+	 * 根据collegeId获取相应学院录入的成绩信息，其中year在sql语句中select
+	 * @param collegeId
+	 * @return
+	 */
+	List<Semester2> getSemester2sToIndex(@Param("collegeId") int collegeId, @Param("number") int number);
+	
+	/**
 	 * 通过职工号和学年录入学生评教成绩
 	 * @param jobNumber
 	 * @return
