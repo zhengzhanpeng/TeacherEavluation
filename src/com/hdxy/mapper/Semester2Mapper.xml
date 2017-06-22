@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+"http://www.mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <mapper namespace="com.hdxy.mapper.Semester2Mapper" >
 	<!-- 用于查询Semester2中的对应学期所有表用到的模型 -->
 	<resultMap type="Semester2" id="semester2List"/>
