@@ -84,7 +84,7 @@
 		}
 	
 		$(document).ready(function(){
-			setTimeout("c()", 500);
+			setTimeout("c()", 800);
 		$("#l1").click(function () {
 			$("#semester2").attr("class", "tab-pane active hidden");
 			$("#all").attr("class", "tab-pane active hidden");

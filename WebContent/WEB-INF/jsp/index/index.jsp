@@ -27,6 +27,7 @@
     <div class="center" >
 			<div class="center-title">
 				<p>学院部门</p>
+				<a href="../admin/login"><button id="adminM">管理员登陆入口</button></a>
 				<a href="../user/login"><button>教师登陆入口</button></a>
 			</div>
 			<div class="college">
@@ -48,6 +49,12 @@
  
   </div>
   <script>
+   $(document).ready(function(){
+	    if(document.all)
+	    {	
+	        alert("您的浏览器版本太老了~,请使用谷歌chrome浏览器、火狐浏览器，360浏览器极速模式 、进行访问，以获得更好的浏览体验");
+	    }
+	});
 	$(".center-title button").click(function(){
 	//window.location.href = "";
 	});
