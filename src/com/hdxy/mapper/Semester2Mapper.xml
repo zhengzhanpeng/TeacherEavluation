@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://www.mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE generatorConfiguration PUBLIC 
+"-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >  
 <mapper namespace="com.hdxy.mapper.Semester2Mapper" >
 	<!-- 用于查询Semester2中的对应学期所有表用到的模型 -->
 	<resultMap type="Semester2" id="semester2List"/>
@@ -32,8 +33,16 @@
 		UPDATE semester2 SET studentScore = #{studentScore} WHERE jobNumber = #{jobNumber} AND year = #{year};
 	</update>
 	<insert id="addStudentScore" parameterType="ScoreInput">
-		INSERT INTO semester2 (id, jobNumber, name, position, superviseScore, peerScore, teachScore, studentScore, year)
-		SELECT null, #{jobNumber}, name, position, 0, 0, 0, #{studentScore} , #{year}
+		INSERT INTO semester2 (id, jobNumber, name, position
+		<if test="collegeId != null">
+			, collegeId
+		</if>
+		, superviseScore, peerScore, teachScore, studentScore, year)
+		SELECT null, #{jobNumber}, name, position
+		<if test="collegeId != null">
+			, #{collegeId}
+		</if>
+		, 0, 0, 0, #{studentScore}, #{year}
 		FROM teacher_data WHERE jobNumber = #{jobNumber};
 	</insert>
 	<select id="getScoreInputShow" resultMap="scoreInputShowList">
@@ -53,7 +62,8 @@
 	<select id="getEndScoreInput" parameterType="Integer" resultMap="endScoreInputList">
 		SELECT s1.jobNumber AS jobNumber, s1.name AS name, 2 AS semester
 		FROM semester1 AS s1 LEFT OUTER JOIN semester2 AS s2 ON s2.jobNumber = s1.jobNumber
-		WHERE s1.collegeId = #{collegeId} AND s2.jobNumber is null
+		WHERE s1.collegeId = #{collegeId} AND 
+		(s2.jobNumber is null OR (s2.superviseScore = 0 AND s2.peerScore = 0 AND s2.teachScore !=0 AND s2.studentScore = 0))
 		UNION
 		SELECT s1.jobNumber AS jobNumber, s1.name AS name, 1 AS semester
 		FROM semester2 AS s1 LEFT OUTER JOIN semester1 AS s2 ON s2.jobNumber = s1.jobNumber
@@ -141,4 +151,7 @@
 		</if>
 		);
 	</insert>
+	<update id="updateEndScore" parameterType="Semester2">
+		UPDATE semester2 SET endScore = #{endScore} WHERE jobNumber = #{jobNumber} AND year = #{year};
+	</update>
 </mapper>

@@ -96,7 +96,9 @@ public class EndScoreInputController {
 			semester1.setName(endScoreInput.getName());
 			semester1.setYear(year);
 			semester1.setPosition(t.getPosition());
-			result = semester1Mapper.addSemester1Set(semester1);
+			result = semester1Mapper.updateEndScore(semester1);
+			if(result == 0)
+				result = semester1Mapper.addSemester1Set(semester1);
 		} else {
 			Semester2 semester2 = new Semester2();
 			semester2.setDate(new Date());
@@ -106,7 +108,9 @@ public class EndScoreInputController {
 			semester2.setName(endScoreInput.getName());
 			semester2.setYear(year);
 			semester2.setPosition(t.getPosition());
-			result = semester2Mapper.addSemester2Set(semester2);
+			result = semester2Mapper.updateEndScore(semester2);
+			if(result == 0)
+				result = semester2Mapper.addSemester2Set(semester2);
 		}
 		if(result == 0) return ReturnMessageUtil.SYSTEM_BUSY;
 		return ReturnMessageUtil.TRUE;

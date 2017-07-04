@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.hdxy.pojo.EndScoreInput;
 import com.hdxy.pojo.ScoreInput;
 import com.hdxy.pojo.ScoreInputShow;
+import com.hdxy.pojo.Semester1;
 import com.hdxy.pojo.Semester2;
 
 public interface Semester2Mapper {
@@ -108,4 +109,9 @@ public interface Semester2Mapper {
 	 * @return
 	 */
 	List<String> getEndScoreCollege();
+	
+	/**
+	 * 更新教师期末成绩
+	 */
+	int updateEndScore(Semester2 semester2);
 }

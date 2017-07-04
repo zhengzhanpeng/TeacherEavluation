@@ -99,6 +99,11 @@ public interface Semester1Mapper {
 	 * @return
 	 */
 	int addSemester1Set(Semester1 s);
+	
+	/**
+	 * 更新教师期末成绩
+	 */
+	int updateEndScore(Semester1 semester1);
 }
 
 
