@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>  
-<!DOCTYPE generatorConfiguration PUBLIC 
-"-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >  
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdxy.mapper.Semester1Mapper" >
     <!-- 用于查询Semester1中的对应学期所有表用到的模型 -->
 	<resultMap type="Semester1" id="semester1List">
@@ -62,7 +61,38 @@
 		AND year = #{year, jdbcType=INTEGER};
 	</select>
 	<insert id="addSemester1Set" parameterType="Semester1">
-		INSERT INTO semester1 values(null 
+		INSERT INTO semester1(id
+		<if test="jobNumber != null">
+			, jobNumber
+		</if>
+		<if test="name != null">
+			, name
+		</if>
+		<if test="position != null">
+			, position
+		</if>
+		<if test="collegeId != null">
+			, collegeId
+		</if>
+		<if test="superviseScore != null">
+			, superviseScore
+		</if>
+		<if test="peerScore != null">
+			, peerScore
+		</if>
+		<if test="studentScore != null">
+			, studentScore
+		</if>
+		<if test="endScore != null">
+			, endScore
+		</if>
+		<if test="date != null">
+			, date
+		</if>
+		<if test="year != null">
+			, year
+		</if>
+		) values(null 
 		<if test="jobNumber != null">
 			, #{jobNumber}
 		</if>
