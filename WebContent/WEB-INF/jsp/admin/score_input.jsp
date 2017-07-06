@@ -82,17 +82,19 @@
 						}
 						var jsonData= XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]) ;
 						var data = JSON.stringify(jsonData);
+						layer.close(index);
+						layer.msg('正在导入，请您稍后片刻', {icon: 6,time: 700});
 						$.ajax({	//发起请求
 						   "url":"score_input",
 						   "data":data,
 						   "type":"post",
 							"contentType": "application/json;charset=utf-8",
 						   "error":function(){
-							   layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});
+							   layer.confirm("服务器繁忙，请稍后再试", {icon: 5, anim: 0});
 						   },
 						  "success":function(response){
 							   if(response == 1) {
-								   layer.msg('保存成功', {icon: 6,time: 700}); 
+								   layer.confirm('导入成功', {icon: 6,time: 700}); 
 								   setTimeout("location.reload()", 800);
 							   } else {
 								   layer.confirm(response, {icon: 3, title:'未成功导入的数据', anim: 6});
@@ -245,17 +247,19 @@
 		   var strB = "以下为未能及时补录的学院：<br />";
 		   strB = strB + collegeB + "计算时会略过这些学院中未及时补录的教师，您确定要现在开始计算吗？";
 		   layer.confirm(strB, {icon: 1, title:'确认计算成绩', anim: 1}, function (index) {
+			   layer.close(index);
+			   layer.msg('已开始计算，请您稍后片刻', {icon: 6,time: 700});
 			   $.ajax({
 				   "url":"compute_semester",
 				   "type":"get",
 				   "error":function(){
-			    	   layer.msg("系统繁忙，请稍后再试", {icon: 5, anim: 0});
+			    	   layer.confirm("系统繁忙，请稍后再试", {icon: 5, anim: 0});
 			       },
 			       "success":function(data){
 			    	   if(data == 1) {
-						   layer.msg('计算完成', {icon: 6,time: 700});
+						   layer.confirm('计算完成', {icon: 6});
 					   } else {
-						   layer.msg(data, {icon: 5, anim: 0});
+						   layer.confirm(data, {icon: 5, anim: 0});
 					   }
 			       }
 			   });

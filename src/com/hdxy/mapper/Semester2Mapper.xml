@@ -77,7 +77,7 @@
 		SELECT collegeName
 		FROM semester2 AS s1 LEFT OUTER JOIN semester1 AS s2 ON s2.jobNumber = s1.jobNumber
 		INNER JOIN college AS c ON s1.collegeId = c.id
-		WHERE s2.jobNumber IS NULL ;
+		WHERE s2.jobNumber IS NULL;
 	</select>
 	<insert id="addSemester2Set" parameterType="Semester2">
 		INSERT INTO semester2(id
