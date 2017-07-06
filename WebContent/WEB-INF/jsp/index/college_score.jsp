@@ -162,7 +162,7 @@
                "type": "post",
                "error":function(){layer.msg("服务器繁忙，请稍后再试", {icon: 5, anim: 0});}
            },
-           "order": [[ 5, "desc" ]],
+           "order": [[ 6, "desc" ]],
            "columns": [
               { "data": "name", "title":"姓名","defaultContent":""},
 			   { "data": "position", "title":"职称","defaultContent":""},
