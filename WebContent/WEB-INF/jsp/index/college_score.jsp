@@ -170,7 +170,7 @@
                { "data": "peerScore", "title":"同行成绩","defaultContent":""},
 			   { "data": "studentScore", "title":"学生评教成绩","defaultContent":""},
 			   { "data": "teachScore", "title":"教学业绩考核成绩","defaultContent":""},
-			   { "data": "endScore2", "title":"第二学期期末成绩","defaultContent":""}
+			   { "data": "endScore", "title":"第二学期期末成绩","defaultContent":""}
            ],
            "language": {
                "sProcessing": "处理中...",

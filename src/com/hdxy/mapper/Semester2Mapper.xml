@@ -62,7 +62,7 @@
 		SELECT s1.jobNumber AS jobNumber, s1.name AS name, 2 AS semester
 		FROM semester1 AS s1 LEFT OUTER JOIN semester2 AS s2 ON s2.jobNumber = s1.jobNumber
 		WHERE s1.collegeId = #{collegeId} AND 
-		(s2.jobNumber is null OR (s2.superviseScore = 0 AND s2.peerScore = 0 AND s2.teachScore !=0 AND (s2.endScore IS NULL) AND s2.endScore = 0))
+		(s2.jobNumber is null OR (s2.superviseScore = 0 AND s2.peerScore = 0 AND s2.teachScore !=0 AND ((s2.endScore IS NULL) OR s2.endScore = 0)))
 		UNION
 		SELECT s1.jobNumber AS jobNumber, s1.name AS name, 1 AS semester
 		FROM semester2 AS s1 LEFT OUTER JOIN semester1 AS s2 ON s2.jobNumber = s1.jobNumber
@@ -72,7 +72,7 @@
 		SELECT collegeName
 		FROM semester1 AS s1 LEFT OUTER JOIN semester2 AS s2 ON s2.jobNumber = s1.jobNumber
 		INNER JOIN college AS c ON s1.collegeId = c.id
-		WHERE s2.jobNumber is null
+		(s2.jobNumber is null OR (s2.superviseScore = 0 AND s2.peerScore = 0 AND s2.teachScore !=0 AND ((s2.endScore IS NULL) OR s2.endScore = 0)))
 		UNION
 		SELECT collegeName
 		FROM semester2 AS s1 LEFT OUTER JOIN semester1 AS s2 ON s2.jobNumber = s1.jobNumber
