@@ -248,7 +248,7 @@
 		   strB = strB + collegeB + "计算时会略过这些学院中未及时补录的教师，您确定要现在开始计算吗？";
 		   layer.confirm(strB, {icon: 1, title:'确认计算成绩', anim: 1}, function (index) {
 			   layer.close(index);
-			   layer.msg('已开始计算，请您稍后片刻', {icon: 6,time: 700});
+			   layer.msg('已开始计算，请您稍后片刻', {icon: 6,time: 1500});
 			   $.ajax({
 				   "url":"compute_semester",
 				   "type":"get",

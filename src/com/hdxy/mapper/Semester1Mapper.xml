@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
- "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdxy.mapper.Semester1Mapper" >
     <!-- 用于查询Semester1中的对应学期所有表用到的模型 -->
 	<resultMap type="Semester1" id="semester1List">
@@ -54,7 +54,7 @@
 	<update id="computeEndScore">
 		UPDATE semester1 SET endScore = superviseScore * #{superviseScore, jdbcType=DOUBLE} + 
 		peerScore * #{peerScore, jdbcType=DOUBLE} + studentScore * #{studentScore, jdbcType=DOUBLE}
-		WHERE year = #{year, jdbcType=INTEGER};
+		WHERE year = #{year, jdbcType=INTEGER} AND (endScore IS NULL OR ((superviseScore != 0 AND superviseScore IS NOT NULL) AND (peerScore != 0 AND peerScore IS NOT NULL)));
 	</update>
 	<select id="getAvgEndScore" parameterType="Integer" resultType="Integer">
 		SELECT AVG(endScore) FROM semester1 WHERE (superviseScore != 0 OR peerScore != 0) 
